@@ -1,8 +1,5 @@
 <template>
   <div class="div1">
-    <div class="toggle-button" @click="switching">
-      <span>|||</span>
-    </div>
     <el-menu
       default-active="1-4-1"
       class="el-menu-vertical-demo"
@@ -14,12 +11,8 @@
       text-color="white"
     >
       <el-menu-item index="0">
-        <i class="el-icon-search"></i>
-        <span slot="title">
-          <el-input placeholder="请输入内容" v-model="myserch" class="input-with-select" size="small">
-            <el-button slot="append" icon="el-icon-search" size="mini" :circle="true"></el-button>
-          </el-input>
-        </span>
+        <img src="@/assets/logo.png" alt="" class="img">
+        <span slot="title">tp_商品页面管理系统</span>
       </el-menu-item>
       <el-menu-item index="1" route="/index">
         <i class="el-icon-setting"></i>
@@ -70,7 +63,6 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
 
 export default {
   data() {
@@ -79,16 +71,12 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["fold"]),
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    switching() {
-      this.fold();
-    }
   }
 };
 </script>
@@ -125,5 +113,10 @@ export default {
   width: 160px;
   color: rgb(61, 61, 61);
   border: 0px;
+}
+.img{
+    width: 25px;
+    height: 25px;
+    padding-right: 20px;
 }
 </style>

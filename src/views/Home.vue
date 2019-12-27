@@ -38,7 +38,9 @@ export default {
   height: 100%;
   background-color: rgb(237, 237, 237);
   display: flex;
-
+  .left{
+    height: 100%;
+  }
   .right{
     width: 100%;
     display: flex;

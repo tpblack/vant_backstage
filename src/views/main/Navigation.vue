@@ -6,7 +6,7 @@
       mode="horizontal"
       @select="handleSelect"
     >
-      <!-- <el-menu-item index="1" class="el-icon-s-fold"></el-menu-item> -->
+      <el-menu-item index="5" class="el-icon-s-fold" @click="switching"></el-menu-item>
       <el-menu-item index="1" class="el-icon-refresh-right"></el-menu-item>
       <el-menu-item index="4">
         <el-input v-model="input" class="inputNavigation" size="small" autofocus placeholder="搜索"></el-input>
@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -32,8 +34,12 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["fold"]),
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+    },
+    switching() {
+      this.fold();
     }
   }
 };
