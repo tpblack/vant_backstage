@@ -1,6 +1,6 @@
 # vant_backstage
 
-## Project setup
+## 安装项目
 ```
 npm install
 ```
