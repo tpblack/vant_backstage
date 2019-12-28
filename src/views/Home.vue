@@ -11,6 +11,7 @@
         <!-- 这是顶部导航 -->
         <Navigation></Navigation>
       </div>
+      <div></div>
       <div>
         <!-- 这是内容 -->
         <router-view></router-view>
@@ -48,10 +49,13 @@ export default {
     & > div:nth-child(1){
       width: 100%;
       position: fixed;
-      
       top: 0;
+      
     }
     & > div:nth-child(2){
+      clear:both;
+    }
+    & > div:nth-child(3){
       margin: 20px;
       margin-top: 80px;
     }
