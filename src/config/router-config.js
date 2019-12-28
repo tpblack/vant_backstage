@@ -4,8 +4,11 @@ import Home from '@/views/Home.vue'
 const routers = [{
     path: '/',
     component: Home,
-    children: [
-        {
+    children: [{ //配置登录
+            path: '/firstManagement',
+            component: () => import('@/views/shopManagement/firstManagement'),
+            name: 'firstManagement',
+        }, {
             path: '/',
             name: 'home',
             component: () => import('@/views/homepage/home.vue')
@@ -15,8 +18,7 @@ const routers = [{
             name: 'customerInfo',
             component: () => import('@/views/customer/customerInfo.vue')
         }
-    ]
-}, 
-]
+    ],
+}, ]
 
 export default routers;

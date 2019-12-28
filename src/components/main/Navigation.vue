@@ -4,8 +4,8 @@
       :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
-    >
+      @select="handleSelect">
+      
       <el-menu-item index="5" class="el-icon-s-fold" @click="switching"></el-menu-item>
       <el-menu-item index="1" class="el-icon-refresh-right"></el-menu-item>
       <el-menu-item index="4">
