@@ -11,7 +11,7 @@
         <!-- 这是顶部导航 -->
         <Navigation></Navigation>
       </div>
-      <div >
+      <div>
         <!-- 这是内容 -->
         <router-view></router-view>
       </div>
@@ -21,8 +21,8 @@
 
 <script>
 // 导入header 和footer组件
-import Right from "@/views/main/Right.vue";
-import Navigation from "./main/Navigation.vue";
+import Right from "@/components/main/Right.vue";
+import Navigation from "@/components/main/Navigation.vue";
 export default {
   name: "home",
   // 局部组件引入
@@ -40,13 +40,20 @@ export default {
   display: flex;
   .left{
     height: 100%;
+    // display: block;
   }
   .right{
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    overflow-y: scroll;
+    & > div:nth-child(1){
+      width: 100%;
+      position: fixed;
+      
+      top: 0;
+    }
     & > div:nth-child(2){
       margin: 20px;
+      margin-top: 80px;
     }
   }
 }

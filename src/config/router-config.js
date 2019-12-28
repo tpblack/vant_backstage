@@ -2,11 +2,21 @@
 import Home from '@/views/Home.vue'
 
 const routers = [{
-        path: '/',
-        component: Home,
-        name: 'home',
-    },
-
+    path: '/',
+    component: Home,
+    children: [
+        {
+            path: '/',
+            name: 'home',
+            component: () => import('@/views/homepage/home.vue')
+        },
+        {
+            path: '/customerInfo',
+            name: 'customerInfo',
+            component: () => import('@/views/customer/customerInfo.vue')
+        }
+    ]
+}, 
 ]
 
 export default routers;
