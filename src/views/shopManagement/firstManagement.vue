@@ -28,7 +28,14 @@ export default {
     return {
       imgArr
     };
-  }
+  },
+  //页面渲染完毕调用接口
+  mounted() {
+    
+  },
+  methods:{
+
+  },
 };
 </script>
 
