@@ -40,15 +40,15 @@
           <i class="el-icon-tickets"></i>
           <span slot="title">订单管理</span>
         </template>
-        <el-menu-item index="4-1" route="/index/menu">菜单信息浏览</el-menu-item>
-        <el-menu-item index="4-2" route="/index/tcmenu">套餐信息浏览</el-menu-item>
+        <el-menu-item index="4-1" route="/orderInfo">订单信息预览</el-menu-item>
+        <el-menu-item index="4-2" route="/index/tcmenu">用户评价预览</el-menu-item>
       </el-submenu>
       <el-submenu index="5">
         <template slot="title">
           <i class="el-icon-notebook-1"></i>
           <span slot="title">账户管理</span>
         </template>
-        <el-menu-item index="5-1" route="/index/order">订单信息浏览</el-menu-item>
+        <el-menu-item index="5-1" route="/index/order">资金的流水信息</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

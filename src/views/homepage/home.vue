@@ -42,7 +42,7 @@
                     </a>
                 </span>
             </span>
-            <span class="fSpan_1" style="background-color:rgb(133,43,153);">
+            <!-- <span class="fSpan_1" style="background-color:rgb(133,43,153);">
                 <span class="sSpan_1">
                     <span class="tSpan_1"><i class="el-icon-document-copy i1"></i></span>
                     <span class="tSpan_2">
@@ -56,7 +56,7 @@
                         <i class="el-icon-right"></i>
                     </a>
                 </span>
-            </span>
+            </span> -->
             <span class="fSpan_1" style="background-color:rgb(255,184,72);">
                 <span class="sSpan_1">
                     <span class="tSpan_1"><i class="el-icon-tickets i1"></i></span>
@@ -116,7 +116,7 @@
         name: "home",
         data:function(){
             return({
-                msg:'我是信息'
+                msg:''
             })
         },
         method:{
