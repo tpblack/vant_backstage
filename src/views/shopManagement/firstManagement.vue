@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input1"></el-input>
     <div class="main">
       <div class="cmdlist-text" v-for="(item,index) in imgArr" :key="index">
         <div class="img">
@@ -26,27 +27,50 @@ export default {
   name: "firstManagement",
   data() {
     return {
+      input1: "",
       imgArr
     };
   },
   //页面渲染完毕调用接口
   mounted() {
-    
+    this.fetchManagement();
   },
-  methods:{
-
-  },
+  methods: {
+    fetchManagement() {
+      this.$api.firstlevel.getfindByMain().then(res => {
+        console.log(123);
+        
+      /*   this.isloading = false;
+        let { items, total, page } = res;
+        // console.log(items);
+        // console.log(total);
+        // console.log(page);
+        this.jobs = items; */
+        // //定制分页器
+        // this.pagination = {
+        //   page,
+        //   total
+        // };
+      });
+    }
+  }
 };
 </script>
 
 
 <style lang="scss" scoped>
 .app {
+  background-color: #fff;
   font-size: 14px;
+  .input {
+    width: 345px;
+  }
 }
+
 .main {
   display: flex;
   flex-wrap: wrap;
+
   .cmdlist-text {
     margin-left: 60px;
     margin-top: 60px;

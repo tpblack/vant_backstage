@@ -5,7 +5,7 @@ const firstlevel = [{
         // 定义请求方式
         method: 'get',
         // 定义请求的方法名
-        name: 'findByMain',
+        name: 'getfindByMain',
         // 定义方法的作用
         title: ' 获取商品所有主类'
     },
@@ -15,7 +15,7 @@ const firstlevel = [{
         // 定义请求方式
         method: 'get',
         // 定义请求的方法名
-        name: 'findByAssistant',
+        name: 'getfindByAssistant',
         // 定义方法的作用
         title: ' 获取某个主类下所有的副类（id）主类的id'
     }]
