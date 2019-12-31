@@ -1,7 +1,7 @@
 <template>
   <div class="customerInfo">
     <div class="top_customerInfo">
-      <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input2" clearable></el-input>
+      <el-input placeholder="请输入账号" prefix-icon="el-icon-search" @keyup.enter="customerQuery" v-model="input2" clearable></el-input>
     </div>
     <div class="botton_customerInfo">
       <div class="title_customerInfo_tp">
@@ -82,7 +82,13 @@ export default {
       // 分页器
       pagination: {},
     };
-  }
+  },
+  methods: {
+    customerQuery(){
+      let inputText = this.input2;
+      
+    }
+  },
 };
 </script>
 
