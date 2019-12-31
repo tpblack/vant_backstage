@@ -9,21 +9,15 @@
           </div>
           <div class="shopname"></div>
         </div>
-        <!-- <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="pagination.total"
-          :current-page="pagination.page"
-          @current-change="pageChange"
-          class="mypage"
-        />-->
+        <div class="block">
+          <el-pagination layout="prev, pager, next" :total="1000"></el-pagination>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "shop",
   data() {
@@ -39,13 +33,14 @@ export default {
     this.details();
   },
   methods: {
+    //得到商品信息
     details() {
-      var id = this.$route.params.id;
-      this.$api.firstlevel.findByType({ id }).then(res => {
+      
+      this.$api.firstlevel.findByType({  }).then(res => {
         this.typeList = res;
-        console.log(res)
+        console.log(items);
       });
-      }
+    }
   }
 };
 </script>
