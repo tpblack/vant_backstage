@@ -21,7 +21,7 @@ const Modules = {
 const CONFIG = {
     BASE_URL, //请求的根路径
     TIMEOUT: 30000, //请求超时时间 30s
-    WITHCORS: true, //请求是否携带session验证
+    WITHCORS: false, //请求是否携带session验证
     Modules //配置所有模块信息
 }
 // 实例化api生成器

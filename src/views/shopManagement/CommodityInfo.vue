@@ -3,11 +3,14 @@
     <div class="Centered">
       <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input"></el-input>
       <div class="main">
-        <div class="cmdlist-text" v-for="item in typeList" :key="item.id" @click="serachManagement(item.id)">
+        <div class="cmdlist-text" v-for="(item,index) in typeList" :key="index">
           <div class="img">
             <img src="@/assets/img/avatar3.jpg" />
           </div>
-          <div class="shopname" >{{item.name}}</div>
+          <div class="shopname"></div>
+        </div>
+        <div class="block">
+          <el-pagination layout="prev, pager, next" :total="1000"></el-pagination>
         </div>
       </div>
     </div>
@@ -16,32 +19,28 @@
 
 <script>
 export default {
-  name: "firstManagement",
+  name: "shop",
   data() {
     return {
-      input: '',
-       //商品类别
-      typeList: [],
-        // 分页器
+      input: "",
+      // 分页器
       pagination: {},
+      typeList: []
     };
   },
   //页面渲染完毕调用接口
   mounted() {
-    this.fetchManagement();
+    this.details();
   },
   methods: {
-    fetchManagement() {
-      this.$api.firstlevel.getfindByMain().then(res => {
+    //得到商品信息
+    details() {
+      
+      this.$api.firstlevel.findByType({  }).then(res => {
         this.typeList = res;
-        console.log('这是一级管理')
+        console.log(items);
       });
-    },
-    serachManagement(id){
-      console.log(id)
-      this.$router.push({name:"Secondmanagement", params:{id:id}});
     }
- 
   }
 };
 </script>
