@@ -11,7 +11,7 @@
       background-color="rgb(61,61,61)"
       text-color="white"
     >
-      <el-menu-item index="0">
+      <el-menu-item index="0" route="/">
         <img src="@/assets/logo.png" alt class="img" />
         <span slot="title">tp_商品页面管理系统</span>
       </el-menu-item>

@@ -25,7 +25,6 @@
           <el-table-column prop="spendMoney" label="购买数量"></el-table-column>
           <el-table-column prop="spendMoney" label="付款状态"></el-table-column>
           <!-- <el-table-column prop="spendMoney" label="实付金额"></el-table-column>
-          <el-table-column prop="spendMoney" label="支付类型"></el-table-column>
           <el-table-column prop="spendMoney" label="付款时间"></el-table-column>
           <el-table-column prop="spendMoney" label="邮费"></el-table-column> -->
           <!-- <el-table-column prop="spendMoney" label="交易完成时间"></el-table-column>
@@ -36,7 +35,7 @@
           <el-table-column prop="spendMoney" label="买家是否已经评价"></el-table-column> -->
           <el-table-column label="操作">
             <template>
-              <span style="cursor:pointer; color:#b4b4b4 ">查看详情></span>
+              <router-link to="/orderDetails" style="cursor:pointer; color:#b4b4b4 " >查看详情></router-link>
             </template>
           </el-table-column>
         </el-table>

@@ -18,7 +18,7 @@
             <!-- {{jobTypeUpdata(scope.row.job_type)}}
             </template>-->
           </el-table-column>
-          <el-table-column prop="latelyShopTime" label="最近购买时间"></el-table-column>
+          <el-table-column prop="latelyShopTime" label="消费总单数"></el-table-column>
           <el-table-column prop="spendMoney" label="消费总金额"></el-table-column>
 
           <el-table-column label="操作">

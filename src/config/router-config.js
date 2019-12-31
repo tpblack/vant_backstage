@@ -18,12 +18,37 @@ const routers = [{
         { // 客户消费页面
             path: '/customerInfo',
             name: 'customerInfo',
-            component: () => import('@/views/customer/customerInfo.vue')
+            component: () => import('@/views/customer/CustomerInfo.vue')
         },
         { // 订单管理页面
             path: '/orderInfo',
             name: 'orderInfo',
-            component: () => import('@/views/order/OrderInfo.vue')
+            component: () => import('@/views/order/OrderInfo.vue'),
+        },
+        {
+            path: '/orderDetails',
+            component: () => import('@/views/order/OrderDetails.vue'),
+            children: [
+                {
+                    path: '',
+                    name: 'orderDetails',
+                },
+                {
+                    path: '/Order',
+                    name: 'Order',
+                    component: () => import('@/components/orderInfo/Order.vue'),
+                },
+                {
+                    path: '/UserOrder',
+                    name: 'UserOrder',
+                    component: () => import('@/components/orderInfo/UserOrder.vue'),
+                },
+                {
+                    path: '/TableOrder',
+                    name: 'TableOrder',
+                    component: () => import('@/components/orderInfo/TableOrder.vue'),
+                },
+            ]
         }
     ],
 }]
