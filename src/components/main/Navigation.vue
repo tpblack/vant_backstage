@@ -36,7 +36,7 @@ export default {
   methods: {
     ...mapMutations(["fold"]),
     handleSelect(key, keyPath) {
-      console.log(key, keyPath);
+      // console.log(key, keyPath);
     },
     switching() {
       this.fold();
