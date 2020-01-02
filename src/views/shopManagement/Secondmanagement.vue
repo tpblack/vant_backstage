@@ -44,11 +44,10 @@ export default {
         console.log(res);
       });
     },
+    //如果isParent是1则跳转到shop页面再次调用方法
     six(item) {
      if (item.isParent) {
         this.$router.push({name:"shop", params:{id:item.id}});
-      } else {
-        console.log(123);
       } 
     }
   }

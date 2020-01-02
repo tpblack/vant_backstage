@@ -9,8 +9,13 @@
           </div>
           <div class="shopname"></div>
         </div>
-        <div class="block">
-          <el-pagination layout="prev, pager, next" :total="1000"></el-pagination>
+        <div class="mypage">
+          <el-pagination
+            layout="prev, pager, next"
+            :total="pagination.total"
+            :current-page="pagination.pages"
+            @current-change="pageChange"
+          ></el-pagination>
         </div>
       </div>
     </div>
@@ -35,11 +40,27 @@ export default {
   methods: {
     //得到商品信息
     details() {
-      
-      this.$api.firstlevel.findByType({  }).then(res => {
+      // 默认传递页码
+      let params = {
+        page: this.pagination.page || 1
+      };
+      this.$api.firstlevel.findByType(params).then(res => {
         this.typeList = res;
-        console.log(items);
+        console.log(res);
+        this.pagination = {
+          page,
+          total
+        };
       });
+    },
+    //页面改变的方法
+    pageChange(index) {
+      //当前页码
+      // console.log(index);
+      //页码改变 重新修改分页器
+      this.pagination.page = index;
+      //重新查询
+      this.details();
     }
   }
 };
@@ -65,6 +86,10 @@ export default {
       img {
         width: 100px;
         height: 100px;
+      }
+      .mypage {
+        text-align: center;
+        margin-top: 20px;
       }
     }
     .shopname {
