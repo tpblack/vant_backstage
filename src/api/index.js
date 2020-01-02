@@ -5,15 +5,17 @@ import {
 } from '@/config/gateway'
 
 // 引入firstlevel模块
-import firstlevel from './shopManagement/firstlevel';
+import firstlevel from './modules/firstlevel.js';
+// 引入customerInfo模块
+import customerInfo from './modules/customerInfo';
 
 // 引入api生成器
 import ApiGenerator from '@/utils/apiGenerator';
 
-
 //定义模块对象 聚合所有模块
 const Modules = {
     firstlevel, //属性和值用于 省略一个可以不写
+    customerInfo,
 }
 
 

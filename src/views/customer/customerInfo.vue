@@ -1,7 +1,13 @@
 <template>
   <div class="customerInfo">
     <div class="top_customerInfo">
-      <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input2" clearable></el-input>
+      <el-input
+        placeholder="请输入账号"
+        prefix-icon="el-icon-search"
+        @change="customerQueryByUsername"
+        v-model="input2"
+        clearable
+      ></el-input>
     </div>
     <div class="botton_customerInfo">
       <div class="title_customerInfo_tp">
@@ -18,8 +24,8 @@
             <!-- {{jobTypeUpdata(scope.row.job_type)}}
             </template>-->
           </el-table-column>
-          <el-table-column prop="latelyShopTime" label="消费总单数"></el-table-column>
-          <el-table-column prop="spendMoney" label="消费总金额"></el-table-column>
+          <el-table-column prop="num" label="消费总单数"></el-table-column>
+          <el-table-column prop="total" label="消费总金额"></el-table-column>
 
           <el-table-column label="操作">
             <template>
@@ -30,9 +36,9 @@
         <el-pagination
           background
           layout="prev, pager, next"
-          :total="pagination.total"
+          :total="pagination.totalElements"
           :current-page="pagination.page"
-          
+          @current-change="pageChange"
           class="mypage"
         />
       </div>
@@ -45,43 +51,50 @@ export default {
   data() {
     return {
       input2: "",
-      tableData: [
-        {
-          latelyShopTime: "2016-05-02",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          phone: "1231511312",
-          spendMoney: "4564"
-        },
-        {
-          latelyShopTime: "2016-05-04",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          phone: "1231511312",
-          spendMoney: "13216"
-        },
-        {
-          latelyShopTime: "2016-05-01",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          phone: "1231511312",
-          spendMoney: "794"
-        },
-        {
-          latelyShopTime: "2016-05-03",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          phone: "165413216552",
-          spendMoney: "65132"
-        }
-      ],
+      tableData: [],
       // 表格加载状态
       isLoading: false,
-      // 职位列表
-      jobs: [],
+
       // 分页器
-      pagination: {},
+      pagination: {}
     };
+  },
+  mounted() {
+    this.customerQueryAll();
+  },
+  methods: {
+    // 根据用户账号查询
+    customerQueryByUsername() {
+      this.tableData = [];
+      let inputText = this.input2;
+      this.$api.customerInfo.consumption({ userName: inputText }).then(res => {
+        this.pagination.totalElements = 0;
+        this.tableData.push(res);
+        this.input2 = "";
+      });
+    },
+    // 查询所有
+    customerQueryAll() {
+      let page = this.pagination.page || 1;
+      // 在发送请求之前  将表格设为加载状态
+      this.isLoading = true;
+      this.$api.customerInfo.consumptionAll({ page, row: 10 }).then(res => {
+        // 在发送请求之前  将表格加载状态取消
+        this.isLoading = false;
+        let { list, totalElements } = res;
+        this.tableData = list;
+        console.log(res);
+        this.pagination = { page, totalElements };
+      });
+    },
+    // 页面改变的方法
+    pageChange(index) {
+      // 页码改变 重新修改分页器
+      console.log(this.pagination.page);
+      this.pagination.page = index;
+      // 重新查询
+      this.customerQueryAll();
+    }
   }
 };
 </script>
