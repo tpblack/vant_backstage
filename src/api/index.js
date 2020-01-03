@@ -7,7 +7,7 @@ import {
 // 引入firstlevel模块
 import firstlevel from './modules/firstlevel.js';
 // 引入customerInfo模块
-import customerInfo from './modules/customerInfo';
+import customerInfo from './modules/CustomerInfo';
 
 // 引入api生成器
 import ApiGenerator from '@/utils/apiGenerator';
