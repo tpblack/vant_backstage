@@ -7,16 +7,15 @@
           <div class="img">
             <img src="@/assets/img/avatar3.jpg" />
           </div>
-          <div class="shopname"></div>
+          <div class="shopname">{{item.title}}</div>
         </div>
-        <div class="mypage">
-          <el-pagination
-            layout="prev, pager, next"
-            :total="pagination.total"
-            :current-page="pagination.pages"
-            @current-change="pageChange"
-          ></el-pagination>
-        </div>
+        <el-pagination
+          layout="prev, pager, next"
+          :total="pagination.totalElements"
+          :current-page="pagination.page"
+          @current-change="pageChange"
+          class="mypage"
+        ></el-pagination>
       </div>
     </div>
   </div>
@@ -41,15 +40,18 @@ export default {
     //得到商品信息
     details() {
       // 默认传递页码
-      let params = {
-        page: this.pagination.page || 1
-      };
-      this.$api.firstlevel.findByType(params).then(res => {
-        this.typeList = res;
+      var id = this.$route.params.id;
+      let page = this.pagination.totalPages || 1;
+      this.$api.firstlevel.findByType({ page, row: 5, id }).then(res => {
+        let { typeList, totalElements, totalPages } = res;
+        console.log(totalElements);
+        console.log(totalPages);
+        this.typeList = res.content;
         console.log(res);
+
         this.pagination = {
-          page,
-          total
+          totalPages,
+          totalElements
         };
       });
     },
@@ -58,7 +60,7 @@ export default {
       //当前页码
       // console.log(index);
       //页码改变 重新修改分页器
-      this.pagination.page = index;
+      this.pagination.totalPages = index;
       //重新查询
       this.details();
     }
@@ -88,8 +90,7 @@ export default {
         height: 100px;
       }
       .mypage {
-        text-align: center;
-        margin-top: 20px;
+        align-items: center;
       }
     }
     .shopname {

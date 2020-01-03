@@ -38,10 +38,8 @@ export default {
   methods: {
     classification() {
       var id = this.$route.params.id;
-      console.log(id);
       this.$api.firstlevel.findByAssistant({ id }).then(res => {
         this.typeList = res;
-        console.log(res);
       });
     },
     //如果isParent是1则跳转到shop页面再次调用方法
