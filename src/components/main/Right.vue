@@ -41,7 +41,7 @@
           <span slot="title">订单管理</span>
         </template>
         <el-menu-item index="4-1" route="/orderInfo">订单信息预览</el-menu-item>
-        <el-menu-item index="4-2" route="/index/tcmenu">用户评价预览</el-menu-item>
+        <el-menu-item index="4-2" route="/userEvaluate">用户评价预览</el-menu-item>
       </el-submenu>
       <el-submenu index="5">
         <template slot="title">

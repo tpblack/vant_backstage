@@ -11,6 +11,7 @@
         <!-- 这是顶部导航 -->
         <Navigation></Navigation>
       </div>
+      <!-- 去除浮动的占位div -->
       <div></div>
       <div>
         <!-- 这是内容 -->
@@ -45,14 +46,16 @@ export default {
   }
   .right{
     width: 100%;
+    // 滚动条
     overflow-y: scroll;
     & > div:nth-child(1){
       width: 100%;
       position: fixed;
       top: 0;
-      
+      z-index: 999;
     }
     & > div:nth-child(2){
+      // 去除浮动
       clear:both;
     }
     & > div:nth-child(3){

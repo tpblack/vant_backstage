@@ -2,9 +2,9 @@
   <div class="customerInfo">
     <div class="top_customerInfo">
       <el-input
-        placeholder="请输入账号"
+        placeholder="请输入用户名"
         prefix-icon="el-icon-search"
-        @change="customerQueryByUsername"
+        @change="search"
         v-model="input2"
         clearable
       ></el-input>
@@ -16,7 +16,7 @@
           v-loading="isLoading"
           :header-cell-style="{backgroundColor:'#f5f5f5',fontSize:'18px',color:'#616466'}"
         >
-          <el-table-column prop="username" label="姓名" width="280"></el-table-column>
+          <el-table-column prop="username" label="用户名" width="280"></el-table-column>
           <el-table-column prop="phone" label="联系电话">
             <!-- <template slot-scope="scope"> -->
             <!-- scope.row当前表格对象 -->
@@ -26,12 +26,8 @@
           </el-table-column>
           <el-table-column prop="num" label="消费总单数"></el-table-column>
           <el-table-column prop="total" label="消费总金额"></el-table-column>
+          <el-table-column prop="notEvaluated" label="未评价数量"></el-table-column>
 
-          <el-table-column label="操作">
-            <template>
-              <span style="cursor:pointer; color:#b4b4b4 ">查看详情></span>
-            </template>
-          </el-table-column>
         </el-table>
         <el-pagination
           background
@@ -60,32 +56,29 @@ export default {
     };
   },
   mounted() {
-    this.customerQueryAll();
+    this.customerQueryByUsername();
   },
   methods: {
+    search() {
+      this.pagination.page = 1;
+      this.customerQueryByUsername();
+    },
     // 根据用户账号查询
     customerQueryByUsername() {
-      this.tableData = [];
       let inputText = this.input2;
-      this.$api.customerInfo.consumption({ userName: inputText }).then(res => {
-        this.pagination.totalElements = 0;
-        this.tableData.push(res);
-        this.input2 = "";
-      });
-    },
-    // 查询所有
-    customerQueryAll() {
       let page = this.pagination.page || 1;
       // 在发送请求之前  将表格设为加载状态
       this.isLoading = true;
-      this.$api.customerInfo.consumptionAll({ page, row: 10 }).then(res => {
-        // 在发送请求之前  将表格加载状态取消
-        this.isLoading = false;
-        let { list, totalElements } = res;
-        this.tableData = list;
-        console.log(res);
-        this.pagination = { page, totalElements };
-      });
+      this.$api.customerInfo
+        .consumptionFindByUserNameLike({ page, row: 10, userName: inputText })
+        .then(res => {
+          // 在发送请求之前  将表格加载状态取消
+          this.isLoading = false;
+          let { list, totalElements } = res;
+          this.tableData = list;
+          console.log(res);
+          this.pagination = { page, totalElements };
+        });
     },
     // 页面改变的方法
     pageChange(index) {
@@ -93,7 +86,7 @@ export default {
       console.log(this.pagination.page);
       this.pagination.page = index;
       // 重新查询
-      this.customerQueryAll();
+      this.customerQueryByUsername();
     }
   }
 };
