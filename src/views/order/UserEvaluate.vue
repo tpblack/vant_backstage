@@ -49,6 +49,8 @@ export default {
 
 <style lang="scss" scoped>
 .userEvaluate {
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   background-color: #fff;
   .top_userEvaluate {
     max-width: 90%;

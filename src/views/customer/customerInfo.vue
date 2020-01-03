@@ -27,7 +27,6 @@
           <el-table-column prop="num" label="消费总单数"></el-table-column>
           <el-table-column prop="total" label="消费总金额"></el-table-column>
           <el-table-column prop="notEvaluated" label="未评价数量"></el-table-column>
-
         </el-table>
         <el-pagination
           background
@@ -94,6 +93,8 @@ export default {
 
 <style lang="scss" scoped>
 .customerInfo {
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   background-color: #fff;
   .top_customerInfo {
     max-width: 90%;

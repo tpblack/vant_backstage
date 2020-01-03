@@ -32,12 +32,14 @@ export default {
 <style lang="scss" scoped>
 .orderDetails {
   background-color: #fff;
+  // 设置阴影   x   y  半径  颜色
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   padding: 20px;
-  .refund{
+  .refund {
     padding-bottom: 34px;
     border-bottom: 1px #e8e8e8 solid;
   }
-  .userOrder{
+  .userOrder {
     padding-top: 20px;
     padding-bottom: 34px;
     border-bottom: 1px #e8e8e8 solid;

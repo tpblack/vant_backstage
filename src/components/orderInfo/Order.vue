@@ -17,10 +17,6 @@
         <span>菜鸟仓储</span>
       </div>
       <div>
-        <span class="spanName">销售单号：</span>
-        <span>1234123421</span>
-      </div>
-      <div>
         <span class="spanName">订单创建时间：</span>
         <span>2019-12-30</span>
       </div>

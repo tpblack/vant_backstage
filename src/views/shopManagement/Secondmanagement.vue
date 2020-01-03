@@ -46,9 +46,9 @@ export default {
     },
     //如果isParent是1则跳转到shop页面再次调用方法
     six(item) {
-     if (item.isParent) {
-        this.$router.push({name:"shop", params:{id:item.id}});
-      } 
+      if (item.isParent) {
+        this.$router.push({ name: "shop", params: { id: item.id } });
+      }
     }
   }
 };
@@ -57,6 +57,8 @@ export default {
 
 <style lang="scss" scoped>
 .app {
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   background-color: #fff;
   font-size: 14px;
 }

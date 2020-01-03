@@ -100,6 +100,8 @@ export default {
 <style lang="scss" scoped>
 .orderInfo {
   background-color: #fff;
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   .top_orderInfo {
     max-width: 90%;
     margin: 0 auto;
