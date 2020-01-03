@@ -25,6 +25,11 @@ const routers = [{
             component: () => import('@/views/shopManagement/CommodityInfo'),
             name: 'commodityInfo',
         },
+        { // 商品页面
+            path: '/goodsList',
+            name: 'goodsList',
+            component: () => import('@/views/shopManagement/Goodslist.vue')
+        },
         { // 工作台页面  默认
             path: '/',
             name: 'home',
@@ -69,7 +74,7 @@ const routers = [{
                 },
             ]
         },
-        {  //用户评价预览页面
+        { //用户评价预览页面
             path: '/userEvaluate',
             name: 'userEvaluate',
             component: () => import('@/views/order/UserEvaluate.vue'),

@@ -53,6 +53,7 @@ export default {
       if (item.isParent) {
         this.$router.push({ name: "shop", params: { id: item.id } });
       }
+<<<<<<< HEAD
     },
 
     queryList(value) {
@@ -64,6 +65,8 @@ export default {
             console.log(value); // 重新查询
 
       this.classification();
+=======
+>>>>>>> c9ed351d898a11d04ab1d151a1d31d7517de97db
     }
   }
 };
@@ -72,6 +75,8 @@ export default {
 
 <style lang="scss" scoped>
 .app {
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   background-color: #fff;
   font-size: 14px;
 }

@@ -3,7 +3,12 @@
     <div class="Centered">
       <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input"></el-input>
       <div class="main">
-        <div class="cmdlist-text" v-for="(item,index) in typeList" :key="index"   @click="shopinfo(item.id)">
+        <div
+          class="cmdlist-text"
+          v-for="(item,index) in typeList"
+          :key="index"
+          @click="shopinfo(item.id)"
+        >
           <div class="img">
             <img src="@/assets/img/avatar3.jpg" />
           </div>
@@ -23,7 +28,6 @@
 </template>
 
 <script>
-
 export default {
   name: "shop",
   data() {
@@ -43,10 +47,10 @@ export default {
       var id = this.$route.params.id;
       this.$api.firstlevel.findByAssistant({ id }).then(res => {
         this.typeList = res;
-        console.log(res)
+        console.log(res);
       });
     },
-     shopinfo(id) {
+    shopinfo(id) {
       this.$router.push({ name: "commodityInfo", params: { id: id } });
     }
   }
@@ -56,6 +60,8 @@ export default {
 
 <style lang="scss" scoped>
 .app {
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   background-color: #fff;
   font-size: 14px;
 }

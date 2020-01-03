@@ -88,6 +88,8 @@ export default {
 
 <style lang="scss" scoped>
 .app {
+  // 设置阴影
+  box-shadow: 1px 1px 10px #ccc, -1px -1px 10px #ccc;
   background-color: #fff;
   font-size: 14px;
 }

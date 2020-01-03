@@ -59,6 +59,7 @@ export default {
       clear:both;
     }
     & > div:nth-child(3){
+      
       margin: 20px;
       margin-top: 80px;
     }
