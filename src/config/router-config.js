@@ -73,6 +73,11 @@ const routers = [{
             path: '/userEvaluate',
             name: 'userEvaluate',
             component: () => import('@/views/order/UserEvaluate.vue'),
+        },
+        {  //资金流水信息页面
+            path: '/FlowInfo',
+            name: 'FlowInfo',
+            component: () => import('@/views/accountManagement/FlowInfo'),
         }
     ],
 }]

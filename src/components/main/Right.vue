@@ -48,7 +48,7 @@
           <i class="el-icon-notebook-1"></i>
           <span slot="title">账户管理</span>
         </template>
-        <el-menu-item index="5-1" route="/index/order">资金的流水信息</el-menu-item>
+        <el-menu-item index="5-1" route="/FlowInfo">资金的流水信息</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

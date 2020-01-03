@@ -1,7 +1,13 @@
 <template>
   <div class="app">
     <div class="Centered">
-      <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input"></el-input>
+      <el-input
+        class="input"
+        placeholder="请输入要查找的内容"
+        v-model="query"
+        @change="queryList"
+        suffix-icon="el-icon-search"
+      ></el-input>
       <div class="main">
         <div class="cmdlist-text" v-for="(item,index) in typeList" :key="index">
           <div class="img">
@@ -26,7 +32,7 @@ export default {
   name: "shop",
   data() {
     return {
-      input: "",
+      query: "",
       // 分页器
       pagination: {},
       typeList: []
@@ -42,6 +48,10 @@ export default {
       // 默认传递页码
       var id = this.$route.params.id;
       let page = this.pagination.totalPages || 1;
+      // 如果文本框有值
+      if (this.query) {
+        params.title = this.query;
+      }
       this.$api.firstlevel.findByType({ page, row: 5, id }).then(res => {
         let { typeList, totalElements, totalPages } = res;
         console.log(totalElements);
@@ -62,6 +72,13 @@ export default {
       //页码改变 重新修改分页器
       this.pagination.totalPages = index;
       //重新查询
+      this.details();
+    },
+    queryList(value) {
+      console.log(value); // 重新查询
+      this.query = value;
+      // 每次进行查询page归1
+      this.pagination.totalPages = 1;
       this.details();
     }
   }

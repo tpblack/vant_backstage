@@ -1,7 +1,13 @@
 <template>
   <div class="app">
     <div class="Centered">
-      <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input"></el-input>
+      <el-input
+        class="input"
+        placeholder="请输入要查找的内容"
+        suffix-icon="el-icon-search"
+        v-model="query"
+        @change="queryList"
+      ></el-input>
       <div class="main">
         <div
           class="cmdlist-text"
@@ -24,7 +30,7 @@ export default {
   name: "Secondmanagement",
   data() {
     return {
-      input: "",
+      query: '',
       // 分页器
       pagination: {},
       typeList: [],
@@ -36,7 +42,7 @@ export default {
     this.classification();
   },
   methods: {
-    classification() {
+    classification() {  // 如果文本框有值
       var id = this.$route.params.id;
       this.$api.firstlevel.findByAssistant({ id }).then(res => {
         this.typeList = res;
@@ -44,9 +50,20 @@ export default {
     },
     //如果isParent是1则跳转到shop页面再次调用方法
     six(item) {
-     if (item.isParent) {
-        this.$router.push({name:"shop", params:{id:item.id}});
-      } 
+      if (item.isParent) {
+        this.$router.push({ name: "shop", params: { id: item.id } });
+      }
+    },
+
+    queryList(value) {
+      this.query = value;
+      if(!this.query){
+        console.error('没有这个商品分类')
+      }
+      // 每次进行查询page归1
+            console.log(value); // 重新查询
+
+      this.classification();
     }
   }
 };
