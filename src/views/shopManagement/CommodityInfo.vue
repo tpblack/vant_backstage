@@ -15,13 +15,15 @@
           </div>
           <div class="shopname">{{item.title}}</div>
         </div>
-        <el-pagination
-          layout="prev, pager, next"
-          :total="pagination.totalElements"
-          :current-page="pagination.page"
-          @current-change="pageChange"
-          class="mypage"
-        ></el-pagination>
+        <div class="pageinfo">
+          <el-pagination
+            layout="prev, pager, next"
+            :total="pagination.totalElements"
+            :current-page="pagination.page"
+            @current-change="pageChange"
+            class="mypage"
+          ></el-pagination>
+        </div>
       </div>
     </div>
   </div>
@@ -52,15 +54,13 @@ export default {
       if (this.query) {
         params.title = this.query;
       }
-      this.$api.firstlevel.findByType({ page, row: 5, id }).then(res => {
-        let { typeList, totalElements, totalPages } = res;
-        console.log(totalElements);
-        console.log(totalPages);
+      this.$api.firstlevel.findByType({ page, row: 10, id }).then(res => {
+        let { image, totalElements, page } = res;
         this.typeList = res.content;
         console.log(res);
 
         this.pagination = {
-          totalPages,
+          page,
           totalElements
         };
       });
@@ -93,12 +93,14 @@ export default {
   background-color: #fff;
   font-size: 14px;
 }
+.Centered {
+  align-items: center;
+}
 .main {
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: center;
   .cmdlist-text {
-    margin-left: 60px;
     margin-top: 60px;
     width: 200px;
     .img {
@@ -116,7 +118,14 @@ export default {
       padding: 20px;
       color: rgb(133, 133, 134);
       text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
+}
+.pageinfo {
+  width: 100%;
+  text-align: center;
 }
 </style>

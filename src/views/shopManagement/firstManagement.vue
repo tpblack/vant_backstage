@@ -58,12 +58,14 @@ export default {
   background-color: #fff;
   font-size: 14px;
 }
+ .Centered{
+      align-items: center;
+    }
 .main {
   display: flex;
   flex-wrap: wrap;
-
+  justify-content: center;
   .cmdlist-text {
-    margin-left: 60px;
     margin-top: 60px;
     width: 200px;
     .img {
@@ -73,6 +75,9 @@ export default {
         width: 100px;
         height: 100px;
       }
+      .mypage {
+        align-items: center;
+      }
     }
     .shopname {
       padding: 20px;
@@ -80,5 +85,9 @@ export default {
       text-align: center;
     }
   }
-}
+  }
+  .pageinfo{
+    width: 100%;
+    text-align: center;
+      }
 </style>
