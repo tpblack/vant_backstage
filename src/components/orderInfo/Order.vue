@@ -6,39 +6,56 @@
     <div class="Order_body">
       <div>
         <span class="spanName">取货单号：</span>
-        <span>1000000000</span>
+        <span>{{order.shippingCode}}</span>
       </div>
       <div>
         <span class="spanName">状态：</span>
-        <span>已取货</span>
-      </div>
-      <div>
-        <span class="spanName">付款状态：</span>
-        <span>菜鸟仓储</span>
+        <span>{{order.status}}</span>
       </div>
       <div>
         <span class="spanName">订单创建时间：</span>
-        <span>2019-12-30</span>
+        <span>{{order.createTime}}</span>
       </div>
       <div>
         <span class="spanName">订单更新时间：</span>
-        <span>2019-12-31</span>
+        <span>{{order.updateTime}}</span>
       </div>
       <div>
         <span class="spanName">交易完成时间：</span>
-        <span>2019-12-31</span>
+        <span>{{order.endTime}}</span>
       </div>
-
-      <!-- <div>
-        <span class="spanName">子订单：</span>
-        <span>3214321432</span>
-      </div>-->
+      <div>
+        <span class="spanName">邮费：</span>
+        <span>{{order.closeTime}}</span>
+      </div>
+      <div>
+        <span class="spanName">物流名称：</span>
+        <span>{{order.shippingName}}</span>
+      </div>
+      <div>
+        <span class="spanName">物流单号：</span>
+        <span>{{order.shippingCode}}</span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  // data() {
+  //   return {
+  //     shippingCode: this.shippingCode,
+  //     status: this.status,
+  //     createTime: this.createTime,
+  //     updateTime: this.updateTime,
+  //     endTime: this.endTime,
+  //     closeTime: this.closeTime,
+  //     shippingName: this.shippingName
+  //   };
+  // },
+  //   物流单号 || 订单单号，状态，订单创建时间，订单更新时间，交易完成时间，交易关闭时间 ，物流名称
+  props: ['order'],
+ };
 </script>
 
 <style lang="scss" scoped>

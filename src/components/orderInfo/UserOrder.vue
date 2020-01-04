@@ -6,39 +6,41 @@
     <div class="UserOrder_body">
       <div>
         <span class="spanName">买家昵称：</span>
-        <span>付小小</span>
+        <span>{{order.buyerNick}}</span>
       </div>
       <div>
         <span class="spanName">联系电话：</span>
-        <span>18100000000</span>
+        <span>{{order.phone}}</span>
       </div>
       <div>
         <span class="spanName">邮箱：</span>
-        <span>2862547491@qq.com</span>
+        <span>{{order.email}}</span>
       </div>
 
-      <div>
+      <!-- <div>
         <span class="spanName">常用快递：</span>
         <span>菜鸟仓储</span>
-      </div>
-      <div>
+      </div>-->
+      <!-- <div>
         <span class="spanName">取货地址：</span>
         <span>浙江省杭州市西湖区万塘路18号</span>
-      </div>
+      </div>-->
       <div>
         <span class="spanName">买家是否已经评价：</span>
-        <span>是</span>
+        <span>{{order.buyerRate}}</span>
       </div>
       <div>
         <span class="spanName">备注：</span>
-        <span>无</span>
+        <span>{{order.buyerMessage}}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["order"]
+};
 </script>
 
 <style lang="scss" scoped>
