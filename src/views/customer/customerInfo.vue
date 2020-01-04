@@ -6,7 +6,6 @@
         prefix-icon="el-icon-search"
         @change="search"
         v-model="input2"
-        
         clearable
       ></el-input>
     </div>

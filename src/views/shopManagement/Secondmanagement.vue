@@ -53,7 +53,6 @@ export default {
       if (item.isParent) {
         this.$router.push({ name: "shop", params: { id: item.id } });
       }
-<<<<<<< HEAD
     },
 
     queryList(value) {
@@ -65,8 +64,6 @@ export default {
             console.log(value); // 重新查询
 
       this.classification();
-=======
->>>>>>> c9ed351d898a11d04ab1d151a1d31d7517de97db
     }
   }
 };

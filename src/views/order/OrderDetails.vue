@@ -25,7 +25,15 @@ export default {
     Order,
     UserOrder,
     TableOrder
-  }
+  },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    
+  },
 };
 </script>
 

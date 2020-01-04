@@ -4,10 +4,12 @@ import {
     BASE_URL
 } from '@/config/gateway'
 
-// 引入firstlevel模块
+// 引入firstlevel模块  商品模块
 import firstlevel from './modules/firstlevel.js';
-// 引入customerInfo模块
+// 引入customerInfo模块  客户消费模块
 import customerInfo from './modules/customerInfo.js';
+// 引入orderInfo模块 订单模块
+import orderInfo from './modules/orderInfo.js';
 
 // 引入api生成器
 import ApiGenerator from '@/utils/apiGenerator';
@@ -16,6 +18,7 @@ import ApiGenerator from '@/utils/apiGenerator';
 const Modules = {
     firstlevel, //属性和值用于 省略一个可以不写
     customerInfo,
+    orderInfo
 }
 
 

@@ -41,7 +41,7 @@ const routers = [{
             component: () => import('@/views/customer/CustomerInfo.vue')
         },
         { // 客户消费详情页面
-            path: '/customerDetails',
+            path: '/customerDetails/:id',
             name: 'customerDetails',
             component: () => import('@/views/customer/CustomerDetails.vue'),
         },
