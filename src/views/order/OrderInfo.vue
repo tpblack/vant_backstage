@@ -1,7 +1,13 @@
 <template>
   <div class="orderInfo">
     <div class="top_orderInfo">
-      <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input2" clearable></el-input>
+      <el-input
+        placeholder="请输入内容"
+        prefix-icon="el-icon-search"
+        @change="search"
+        v-model="input2"
+        clearable
+      ></el-input>
     </div>
     <div class="botton_orderInfo">
       <div class="title_orderInfo_tp">
@@ -10,7 +16,7 @@
           v-loading="isLoading"
           :header-cell-style="{backgroundColor:'#f5f5f5',fontSize:'18px',color:'#616466'}"
         >
-          <el-table-column prop="username" label="买家昵称" width="120"></el-table-column>
+          <el-table-column prop="buyerNick" label="买家昵称" width="120"></el-table-column>
           <el-table-column prop="phone" label="联系电话">
             <!-- <template slot-scope="scope"> -->
             <!-- scope.row当前表格对象 -->
@@ -20,30 +26,31 @@
           </el-table-column>
           <!-- <el-table-column prop="username" label="邮箱"></el-table-column>
           <el-table-column prop="latelyShopTime" label="订单创建时间"></el-table-column>
-          <el-table-column prop="spendMoney" label="订单更新时间"></el-table-column> -->
-          <el-table-column prop="spendMoney" label="商品类型"></el-table-column>
-          <el-table-column prop="spendMoney" label="购买数量"></el-table-column>
-          <el-table-column prop="spendMoney" label="付款状态"></el-table-column>
+          <el-table-column prop="spendMoney" label="订单更新时间"></el-table-column>-->
+          <el-table-column prop="consignTime" label="发货时间"></el-table-column>
+          <el-table-column prop="paymentTime" label="付款时间"></el-table-column>
+          <el-table-column prop="status" label="状态"></el-table-column>
           <!-- <el-table-column prop="spendMoney" label="实付金额"></el-table-column>
           <el-table-column prop="spendMoney" label="付款时间"></el-table-column>
-          <el-table-column prop="spendMoney" label="邮费"></el-table-column> -->
+          <el-table-column prop="spendMoney" label="邮费"></el-table-column>-->
           <!-- <el-table-column prop="spendMoney" label="交易完成时间"></el-table-column>
-          <el-table-column prop="spendMoney" label="交易关闭时间"></el-table-column> -->
-          <el-table-column prop="spendMoney" label="物流名称"></el-table-column>
-          <el-table-column prop="spendMoney" label="物流单号"></el-table-column>
+          <el-table-column prop="spendMoney" label="交易关闭时间"></el-table-column>-->
+          <el-table-column prop="shippingName" label="物流名称"></el-table-column>
+          <el-table-column prop="shippingCode" label="物流单号"></el-table-column>
           <!-- <el-table-column prop="spendMoney" label="买家留言"></el-table-column>
-          <el-table-column prop="spendMoney" label="买家是否已经评价"></el-table-column> -->
+          <el-table-column prop="spendMoney" label="买家是否已经评价"></el-table-column>-->
           <el-table-column label="操作">
-            <template>
-              <router-link to="/orderDetails" style="cursor:pointer; color:#b4b4b4 " >查看详情></router-link>
+            <template scope="slotScope">
+              <span @click="orderDetails_Tp(slotScope.row.orderId)" style="cursor:pointer; color:#b4b4b4">查看详情></span>
             </template>
           </el-table-column>
         </el-table>
         <el-pagination
           background
           layout="prev, pager, next"
-          :total="pagination.total"
+          :total="pagination.totalElements"
           :current-page="pagination.page"
+          @current-change="pageChange"
           class="mypage"
         />
       </div>
@@ -52,40 +59,12 @@
 </template>
 
 <script>
+import {orderPaymentStatus,orderTimeInterception} from "@/utils/order";
 export default {
   data() {
     return {
       input2: "",
-      tableData: [
-        {
-          latelyShopTime: "2016-05-02",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          phone: "1231511312",
-          spendMoney: "4564"
-        },
-        {
-          latelyShopTime: "2016-05-04",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          phone: "1231511312",
-          spendMoney: "13216"
-        },
-        {
-          latelyShopTime: "2016-05-01",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          phone: "1231511312",
-          spendMoney: "794"
-        },
-        {
-          latelyShopTime: "2016-05-03",
-          username: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          phone: "165413216552",
-          spendMoney: "65132"
-        }
-      ],
+      tableData: [],
       // 表格加载状态
       isLoading: false,
       // 职位列表
@@ -93,6 +72,51 @@ export default {
       // 分页器
       pagination: {}
     };
+  },
+  mounted() {
+    this.findByOrderId();
+  },
+  methods: {
+    search() {
+      this.pagination.page = 1;
+      this.findByOrderId();
+    },
+    findByOrderId() {
+      // 文本框的值
+      let inputText = this.input2;
+      // 如果this.pagination.page有值就选他的值，如果没有就是1
+      let page = this.pagination.page || 1;
+      // 在发送请求之前  将表格设为加载状态
+      this.isLoading = true;
+      // 发送请求
+      this.$api.orderInfo
+        .findByUserName({ page, row: 10, seek: inputText })
+        .then(res => {
+          // 在发送请求之前  将表格加载状态取消
+          this.isLoading = false;
+          let { list, totalElements } = res;
+          this.tableData = list.filter(item => {
+            // 这是封装方法  判断状态
+            item.status = orderPaymentStatus(item.status);
+            item.consignTime = orderTimeInterception(item.consignTime)
+            item.paymentTime = orderTimeInterception(item.paymentTime)
+            return item;
+          });
+          console.log(this.tableData);
+
+          this.pagination = { page, totalElements };
+        });
+    },
+    // 页面改变的方法
+    pageChange(index) {
+      // 页码改变 重新修改分页器
+      this.pagination.page = index;
+      // 重新查询
+      this.findByOrderId();
+    },
+    orderDetails_Tp(orderId){
+      this.$router.push({name:"customerDetails",params:{id:orderId}})
+    }
   }
 };
 </script>
