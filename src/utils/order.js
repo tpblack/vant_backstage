@@ -17,3 +17,11 @@ export var orderPaymentStatus =  function (num){
 export var orderTimeInterception = function(timeStr){
     return timeStr.slice(0,timeStr.indexOf("T"))
 }
+
+export var orderBuyerRate = function(buyerRate){
+    if(buyerRate==1){
+        return "是";
+    }else if(buyerRate==2){
+        return "否"
+    }
+}

@@ -41,7 +41,7 @@ const routers = [{
             component: () => import('@/views/customer/CustomerInfo.vue')
         },
         { // 客户消费详情页面
-            path: '/customerDetails/:id',
+            path: '/customerDetails',
             name: 'customerDetails',
             component: () => import('@/views/customer/CustomerDetails.vue'),
         },
@@ -51,28 +51,9 @@ const routers = [{
             component: () => import('@/views/order/OrderInfo.vue'),
         },
         { // 订单详情页面
-            path: '/orderDetails',
+            path: '/orderDetails/:orderId',
             component: () => import('@/views/order/OrderDetails.vue'),
-            children: [{
-                    path: '',
-                    name: 'orderDetails',
-                },
-                { //详情页面的订单
-                    path: '/Order',
-                    name: 'Order',
-                    component: () => import('@/components/orderInfo/Order.vue'),
-                },
-                { // 用户
-                    path: '/UserOrder',
-                    name: 'UserOrder',
-                    component: () => import('@/components/orderInfo/UserOrder.vue'),
-                },
-                { // 表格详情
-                    path: '/TableOrder',
-                    name: 'TableOrder',
-                    component: () => import('@/components/orderInfo/TableOrder.vue'),
-                },
-            ]
+            name: 'orderDetails'
         },
         { //用户评价预览页面
             path: '/userEvaluate',

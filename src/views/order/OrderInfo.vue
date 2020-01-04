@@ -98,11 +98,12 @@ export default {
           this.tableData = list.filter(item => {
             // 这是封装方法  判断状态
             item.status = orderPaymentStatus(item.status);
+            // 这是封装方法  截取时间
             item.consignTime = orderTimeInterception(item.consignTime)
             item.paymentTime = orderTimeInterception(item.paymentTime)
             return item;
           });
-          console.log(this.tableData);
+          // console.log(this.tableData);
 
           this.pagination = { page, totalElements };
         });
@@ -115,7 +116,7 @@ export default {
       this.findByOrderId();
     },
     orderDetails_Tp(orderId){
-      this.$router.push({name:"customerDetails",params:{id:orderId}})
+      this.$router.push({name:"orderDetails",params:{orderId}})
     }
   }
 };
