@@ -6,7 +6,6 @@
         prefix-icon="el-icon-search"
         @change="search"
         v-model="input2"
-        
         clearable
       ></el-input>
     </div>
@@ -29,14 +28,14 @@
           <el-table-column prop="total" label="消费总金额"></el-table-column>
           <el-table-column prop="notEvaluated" label="未评价数量"></el-table-column>
         </el-table>
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="pagination.totalElements"
-          :current-page="pagination.page"
-          @current-change="pageChange"
-          class="mypage"
-        />
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="pagination.totalElements"
+            :current-page="pagination.page"
+            @current-change="pageChange"
+            class="mypage"
+          />
       </div>
     </div>
   </div>
