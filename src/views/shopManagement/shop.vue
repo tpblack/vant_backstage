@@ -78,11 +78,12 @@ export default {
     shopinfo(id) {
       this.$router.push({ name: "commodityInfo", params: { id: id } });
     },
-
+  //点击修改 把当前分类名字存入修改input框
     modfiyTwoGoods(item) {
       this.input = item.name;
       this.dialogVisible = true;
-    }
+    },
+  
   }
 };
 </script>

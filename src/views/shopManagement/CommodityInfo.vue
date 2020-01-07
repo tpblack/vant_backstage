@@ -10,7 +10,19 @@
             <div class="shopname">{{item.title}}</div>
           </div>
           <div class="btn">
-            <el-button type="success" size="mini">修改</el-button>
+            <el-button type="success" size="mini" class="btn1" @click="modfiyTwoGoods(item)">修改</el-button>
+            <el-dialog
+              title="修改商品名"
+              :visible.sync="dialogVisible"
+              width="30%"
+              :before-close="handleClose"
+            >
+              <el-input v-model="input" clearable></el-input>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="keepmodify">确 定</el-button>
+              </span>
+            </el-dialog>
             <el-button type="success" size="mini">删除</el-button>
           </div>
         </div>
@@ -35,7 +47,11 @@ export default {
     return {
       // 分页器
       pagination: {},
-      typeList: []
+      typeList: [],
+      //input值
+      input: "",
+      dialogVisible: false,
+      six:'',
     };
   },
   //页面渲染完毕调用接口
@@ -78,6 +94,27 @@ export default {
       // 每次进行查询page归1
       this.pagination.totalPages = 1;
       this.details();
+    },
+    //点击弹框
+    handleClose(done) {
+      this.$confirm("未保存,确认关闭?")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    //点击修改 把当前分类名字存入修改input框
+    modfiyTwoGoods(item) {
+      this.input = item.title;
+      this.dialogVisible = true;
+    },
+    //点击确认保存修改的名字
+    keepmodify() {
+      this.$api.firstlevel.save({title:this.input} ).then(res => {
+        this.six  = res;
+        console.log(res)
+      });
+      this.dialogVisible = true;
     }
   }
 };
