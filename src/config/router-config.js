@@ -1,11 +1,9 @@
 // 路由配置文件只放路由信息
 import Home from '@/views/Home'
-const routers = [
-    {
+const routers = [{
         path: '/',
         component: Home,
-        children: [
-            {
+        children: [{
                 //密码修改
                 path: '/modifyPassword',
                 name: 'modifyPassword',
@@ -69,19 +67,19 @@ const routers = [
                 component: () => import('@/views/order/OrderDetails.vue'),
                 name: 'orderDetails'
             },
-            { //用户评价预览页面
+            { // 用户评价预览页面
                 path: '/userEvaluate',
                 name: 'userEvaluate',
                 component: () => import('@/views/order/UserEvaluate.vue'),
             },
-            { //资金流水信息页面
+            { // 资金流水信息页面
                 path: '/FlowInfo',
                 name: 'FlowInfo',
                 component: () => import('@/views/accountManagement/FlowInfo'),
             }
         ],
     },
-    {//登錄
+    { //  登录
         path: '/login',
         name: 'login',
         component: () => import('@/views/user/login'),

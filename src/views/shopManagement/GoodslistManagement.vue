@@ -245,6 +245,10 @@ export default {
         .then(res => {
           console.log(res);
           this.centerDialogVisible_modify = false;
+          this.$message.success({
+            message: "修改成功",
+            duration: 1000
+          });
           this.goodsListFindAll();
           this.dalogFrom = {};
         });
@@ -267,9 +271,16 @@ export default {
           cid: dalogFromAdd.cid
         })
         .then(res => {
-          console.log(res);
+          // 将页面关闭
           this.centerDialogVisible_add = false;
+          // 友好提示
+          this.$message.success({
+            message: "新增成功",
+            duration: 1000
+          });
+          // 重新查询 刷新效果
           this.goodsListFindAll();
+          // 清空新增的容器对象
           this.dalogFromAdd = {};
         });
     }

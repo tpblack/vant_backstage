@@ -36,6 +36,10 @@ class ApiGenerator { // es6的语法
                 //   page: 7
                 // } //为了不影响原本的参数  复制一份之前的参数
                 // console.log('这是axios拦截的请求', req)
+                if( localStorage.getItem('TOKEN')){
+                    req.headers.token = localStorage.getItem('TOKEN')
+                }
+                console.log(req)
                 return req;
             },
             (err) => { //请求拦截失败的回调函数 请求失败
