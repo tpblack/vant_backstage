@@ -18,7 +18,7 @@
     </el-table>
     <!-- <el-pagination
       background
-      layout="prev, pager, next"
+       layout="prev, pager, next"
       :total="pagination.total"
       :current-page="pagination.page"
       class="mypage"

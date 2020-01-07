@@ -163,7 +163,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      input2: '',
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
