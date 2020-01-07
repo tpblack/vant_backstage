@@ -21,7 +21,7 @@
 </template>
 
 <script>
-// import { mapMutations } from "vuex";
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -32,9 +32,9 @@ export default {
     };
   },
   methods: {
-    // ...mapMutations({
-    //   abc: "setLoginTOKEN"
-    // }),
+    ...mapMutations({
+      changeLogin_tokenTp: "changeLogin"
+    }),
     homepage() {
       // 先判断文本框是否有内容
       if (!this.input) {
@@ -55,10 +55,8 @@ export default {
       this.$api.user
         .backstageLogin({ userName: this.input, password: this.input1 })
         .then(res => {
-          // console.log(res);
-          // this.abc("TOKEN_tp")
-          // console.log(111)
-          localStorage.setItem("TOKEN", res + "");
+          console.log(res);
+          this.changeLogin_tokenTp(res)
           this.$router.push("/");
         });
     }

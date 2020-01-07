@@ -6,6 +6,8 @@ import qs from 'qs';
 import {
     Message
 } from 'element-ui';
+
+import store from '@/store'
 // 定义一个api生成器
 class ApiGenerator { // es6的语法
 
@@ -36,10 +38,12 @@ class ApiGenerator { // es6的语法
                 //   page: 7
                 // } //为了不影响原本的参数  复制一份之前的参数
                 // console.log('这是axios拦截的请求', req)
-                if( localStorage.getItem('TOKEN')){
-                    req.headers.token = localStorage.getItem('TOKEN')
+                console.log(store.state.localStorageKey);
+                if (store.state.localStorageKey) {
+                    // console.log(localStorage.getItem("TOKEN"))
+                    req.headers.token = store.state.localStorageKey;
                 }
-                console.log(req)
+                // console.log(req)
                 return req;
             },
             (err) => { //请求拦截失败的回调函数 请求失败
