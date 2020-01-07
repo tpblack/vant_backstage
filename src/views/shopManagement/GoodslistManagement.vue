@@ -12,19 +12,23 @@
           v-loading="isLoading"
           :header-cell-style="{backgroundColor:'#f5f5f5',fontSize:'16px',color:'#616466'}"
         >
-          <el-table-column prop="image" label="商品图片">
+          <el-table-column prop="image" label="商品图片" align="center">
             <template scope="slotScope">
               <img :src="slotScope.row.image" style="width:70px;height:70px" />
             </template>
           </el-table-column>
-          <el-table-column prop="title" label="商品标题" width="200px"></el-table-column>
-          <el-table-column prop="sellPoint" label="商品卖点" width="200px"></el-table-column>
-          <el-table-column prop="price" label="商品价格"></el-table-column>
-          <el-table-column prop="num" label="库存数量"></el-table-column>
-          <el-table-column prop="cid" label="所属类目"></el-table-column>
-          <el-table-column prop="status" label="商品状态"></el-table-column>
-          <el-table-column prop="created" label="创建时间"></el-table-column>
-          <el-table-column prop="updated" label="更新时间"></el-table-column>
+          <el-table-column prop="title" label="商品标题" width="195px" align="center"></el-table-column>
+          <el-table-column  label="商品卖点" width="195px" align="center">
+            <template scope="slotScope">
+              <div v-html="slotScope.row.sellPoint"></div>
+            </template>
+          </el-table-column>
+          <el-table-column prop="price" label="商品价格" align="center"></el-table-column>
+          <el-table-column prop="num" label="库存数量" align="center"></el-table-column>
+          <el-table-column prop="cid" label="所属类目" align="center"></el-table-column>
+          <el-table-column prop="status" label="商品状态" align="center"></el-table-column>
+          <el-table-column prop="created" label="创建时间" align="center"></el-table-column>
+          <el-table-column prop="updated" label="更新时间" align="center"></el-table-column>
           <el-table-column label="操作" width="100px">
             <template scope="slotScope">
               <div style="cursor:pointer; color:#b4b4b4; margin-right:10px">查看详情></div>
