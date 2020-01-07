@@ -1,18 +1,30 @@
 <template>
   <div class="app">
     <div class="Centered">
-      <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input"></el-input>
       <div class="main">
-        <div
-          class="cmdlist-text"
-          v-for="(item,index) in typeList"
-          :key="index"
-          @click="shopinfo(item.id)"
-        >
-          <div class="img">
-            <img src="@/assets/img/avatar3.jpg" />
+        <div class="cmdlist-text" v-for="(item,index) in typeList" :key="index">
+          <div @click="shopinfo(item.id)">
+            <div class="img">
+              <img src="@/assets/img/avatar3.jpg" />
+            </div>
+            <div class="shopname">{{item.name}}</div>
           </div>
-          <div class="shopname">{{item.name}}</div>
+          <div class="btn">
+            <el-button type="success" size="mini"  class="btn1" @click="modfiyTwoGoods(item)">修改</el-button>
+            <el-dialog
+              title="修改商品名"
+              :visible.sync="dialogVisible"
+              width="30%"
+              :before-close="handleClose"
+            >
+              <el-input v-model="input" clearable></el-input>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="dialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+              </span>
+            </el-dialog>
+            <el-button type="success" size="mini">删除</el-button>
+          </div>
         </div>
         <!-- <el-pagination
           background
@@ -28,14 +40,18 @@
 </template>
 
 <script>
+
 export default {
   name: "shop",
   data() {
     return {
-      input: "",
       // 分页器
       pagination: {},
-      typeList: []
+      typeList: [],
+      //input值
+      input: "",
+      //修改弹出框
+      dialogVisible: false
     };
   },
   //页面渲染完毕调用接口
@@ -43,15 +59,29 @@ export default {
     this.details();
   },
   methods: {
+    handleClose(done) {
+      this.$confirm("未保存,确认关闭?")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
     details() {
+      //查询主类下的负类
       var id = this.$route.params.id;
       this.$api.firstlevel.findByAssistant({ id }).then(res => {
         this.typeList = res;
         console.log(res);
       });
     },
+    //跳转到商品页面
     shopinfo(id) {
       this.$router.push({ name: "commodityInfo", params: { id: id } });
+    },
+
+    modfiyTwoGoods(item) {
+      this.input = item.name;
+      this.dialogVisible = true;
     }
   }
 };
@@ -65,9 +95,9 @@ export default {
   background-color: #fff;
   font-size: 14px;
 }
- .Centered{
-      align-items: center;
-    }
+.Centered {
+  align-items: center;
+}
 .main {
   display: flex;
   flex-wrap: wrap;
@@ -92,9 +122,15 @@ export default {
       text-align: center;
     }
   }
+}
+.btn {
+  padding-left: 40px;
+  .btn1{
+    margin-right: 10px;
   }
-  .pageinfo{
-    width: 100%;
-    text-align: center;
-      }
+}
+.pageinfo {
+  width: 100%;
+  text-align: center;
+}
 </style>

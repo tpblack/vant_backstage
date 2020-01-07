@@ -14,11 +14,14 @@ import orderInfo from './modules/orderInfo.js';
 // 引入api生成器
 import ApiGenerator from '@/utils/apiGenerator';
 
+// user  登陆模块
+import user from './modules/user.js'
 //定义模块对象 聚合所有模块
 const Modules = {
     firstlevel, //属性和值用于 省略一个可以不写
     customerInfo,
-    orderInfo
+    orderInfo,
+    user
 }
 
 

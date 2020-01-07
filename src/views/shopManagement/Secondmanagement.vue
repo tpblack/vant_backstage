@@ -1,24 +1,18 @@
 <template>
   <div class="app">
     <div class="Centered">
-      <el-input
-        class="input"
-        placeholder="请输入要查找的内容"
-        suffix-icon="el-icon-search"
-        v-model="query"
-        @change="queryList"
-      ></el-input>
       <div class="main">
-        <div
-          class="cmdlist-text"
-          v-for="(item,index) in typeList"
-          :key="index"
-          @click="six(item,item.id)"
-        >
-          <div class="img">
-            <img src="@/assets/img/avatar3.jpg" />
+        <div class="cmdlist-text" v-for="(item,index) in typeList" :key="index">
+          <div @click="six(item,item.id)">
+            <div class="img">
+              <img src="@/assets/img/avatar3.jpg" />
+            </div>
+            <div class="shopname">{{item.name}}</div>
           </div>
-          <div class="shopname">{{item.name}}</div>
+          <div class="btn">
+            <el-button type="success" size="mini">修改</el-button>
+            <el-button type="success" size="mini">删除</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -30,11 +24,9 @@ export default {
   name: "Secondmanagement",
   data() {
     return {
-      query: '',
       // 分页器
       pagination: {},
-      typeList: [],
-      typeList1: []
+      typeList: []
     };
   },
   //页面渲染完毕调用接口
@@ -42,7 +34,8 @@ export default {
     this.classification();
   },
   methods: {
-    classification() {  // 如果文本框有值
+    classification() {
+      // 如果文本框有值
       var id = this.$route.params.id;
       this.$api.firstlevel.findByAssistant({ id }).then(res => {
         this.typeList = res;
@@ -56,11 +49,11 @@ export default {
     },
     queryList(value) {
       this.query = value;
-      if(!this.query){
-        console.error('没有这个商品分类')
+      if (!this.query) {
+        console.error("没有这个商品分类");
       }
       // 每次进行查询page归1
-            console.log(value); // 重新查询
+      console.log(value); // 重新查询
 
       this.classification();
     }
@@ -76,9 +69,9 @@ export default {
   background-color: #fff;
   font-size: 14px;
 }
- .Centered{
-      align-items: center;
-    }
+.Centered {
+  align-items: center;
+}
 .main {
   display: flex;
   flex-wrap: wrap;
@@ -103,9 +96,12 @@ export default {
       text-align: center;
     }
   }
-  }
-  .pageinfo{
-    width: 100%;
-    text-align: center;
-      }
+}
+.btn {
+  padding-left: 40px;
+}
+.pageinfo {
+  width: 100%;
+  text-align: center;
+}
 </style>

@@ -1,19 +1,18 @@
 <template>
   <div class="app">
     <div class="Centered">
-      <el-input
-        class="input"
-        placeholder="请输入要查找的内容"
-        v-model="query"
-        @change="queryList"
-        suffix-icon="el-icon-search"
-      ></el-input>
       <div class="main">
         <div class="cmdlist-text" v-for="(item,index) in typeList" :key="index">
-          <div class="img">
-            <img src="@/assets/img/avatar3.jpg" />
+          <div>
+            <div class="img">
+              <img src="@/assets/img/avatar3.jpg" />
+            </div>
+            <div class="shopname">{{item.title}}</div>
           </div>
-          <div class="shopname">{{item.title}}</div>
+          <div class="btn">
+            <el-button type="success" size="mini">修改</el-button>
+            <el-button type="success" size="mini">删除</el-button>
+          </div>
         </div>
         <div class="pageinfo">
           <el-pagination
@@ -34,7 +33,6 @@ export default {
   name: "shop",
   data() {
     return {
-      query: "",
       // 分页器
       pagination: {},
       typeList: []
@@ -57,7 +55,7 @@ export default {
       this.$api.firstlevel.findByType({ page, row: 10, id }).then(res => {
         let { image, totalElements, page } = res;
         this.typeList = res.content;
-        console.log(res);
+        // console.log(res);
 
         this.pagination = {
           page,
@@ -123,6 +121,9 @@ export default {
       white-space: nowrap;
     }
   }
+}
+.btn {
+  padding-left: 40px;
 }
 .pageinfo {
   width: 100%;

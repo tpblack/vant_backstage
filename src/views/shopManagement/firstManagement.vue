@@ -1,18 +1,18 @@
 <template>
   <div class="app">
     <div class="Centered">
-      <el-input class="input" placeholder="请输入要查找的内容" suffix-icon="el-icon-search" v-model="input"></el-input>
       <div class="main">
-        <div
-          class="cmdlist-text"
-          v-for="item in typeList"
-          :key="item.id"
-          @click="serachManagement(item.id)"
-        >
-          <div class="img">
-            <img src="@/assets/img/avatar3.jpg" />
+        <div class="cmdlist-text" v-for="item in typeList" :key="item.id">
+          <div @click="serachManagement(item.id)">
+            <div class="img">
+              <img src="@/assets/img/avatar3.jpg" />
+            </div>
+            <div class="shopname">{{item.name}}</div>
           </div>
-          <div class="shopname">{{item.name}}</div>
+          <div class="btn">
+            <el-button type="success" size="mini">修改</el-button>
+            <el-button type="success" size="mini">删除</el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -24,7 +24,6 @@ export default {
   name: "firstManagement",
   data() {
     return {
-      input: "",
       //商品类别
       typeList: [],
       // 分页器
@@ -42,6 +41,7 @@ export default {
         console.log("这是一级管理");
       });
     },
+    //页面跳转
     serachManagement(id) {
       console.log(id);
       this.$router.push({ name: "Secondmanagement", params: { id: id } });
@@ -58,9 +58,9 @@ export default {
   background-color: #fff;
   font-size: 14px;
 }
- .Centered{
-      align-items: center;
-    }
+.Centered {
+  align-items: center;
+}
 .main {
   display: flex;
   flex-wrap: wrap;
@@ -85,9 +85,12 @@ export default {
       text-align: center;
     }
   }
-  }
-  .pageinfo{
-    width: 100%;
-    text-align: center;
-      }
+}
+.pageinfo {
+  width: 100%;
+  text-align: center;
+}
+.btn {
+  padding-left: 40px;
+}
 </style>
