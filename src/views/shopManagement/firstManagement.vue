@@ -10,11 +10,18 @@
             <div class="shopname">{{item.name}}</div>
           </div>
           <div class="btn">
-            <el-button type="success" size="mini">修改</el-button>
-            <el-button type="success" size="mini">删除</el-button>
+            <el-button type="success" size="mini" @click="modifyName(item)">修改表名</el-button>
           </div>
         </div>
       </div>
+      <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+        <el-input v-model="input"></el-input>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="modifyKeep">确 定</el-button>
+        </span>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -27,7 +34,10 @@ export default {
       //商品类别
       typeList: [],
       // 分页器
-      pagination: {}
+      pagination: {},
+      dialogVisible: false,
+      input: "",
+      activeItem: {}
     };
   },
   //页面渲染完毕调用接口
@@ -35,16 +45,42 @@ export default {
     this.fetchManagement();
   },
   methods: {
+    //从数据库查找商品管理数据
     fetchManagement() {
       this.$api.firstlevel.getfindByMain().then(res => {
         this.typeList = res;
-        console.log("这是一级管理");
       });
     },
     //页面跳转
     serachManagement(id) {
       console.log(id);
       this.$router.push({ name: "Secondmanagement", params: { id: id } });
+    },
+    //将表面映射在弹出框input中
+    modifyName(item) {
+      this.activeItem = item;
+      this.input = item.name;
+      this.dialogVisible = true;
+    },
+    //关闭表名弹框提示
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    //修改名字保存
+    modifyKeep() {
+      var id = this.activeItem.id;
+      this.$api.firstlevel.updateName({id:id,name:this.input}).then(res => {
+       /*    this.$message.success({
+            message: "修改成功",
+            duration: 1000
+          }); */
+          this.fetchManagement();
+        });
+      this.dialogVisible = false;
     }
   }
 };
@@ -86,11 +122,11 @@ export default {
     }
   }
 }
+.btn {
+  padding-left: 60px;
+}
 .pageinfo {
   width: 100%;
   text-align: center;
-}
-.btn {
-  padding-left: 40px;
 }
 </style>

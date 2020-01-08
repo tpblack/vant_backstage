@@ -50,6 +50,16 @@ const firstlevel = [{
         title: '根据商品名称模糊查询商品，分页获取商品'
     },
     {
+          // 定义请求地址
+          url: 'type/updateName',
+          // 定义请求方式
+          method: 'get',
+          // 定义请求的方法名
+          name: 'updateName',
+          // 定义方法的作用
+          title: '根据商品类型id修改商品类型名称（类型id，类型修改后的名称）'
+    },
+    {
         // 定义请求地址
         url: '/item/save',
         // 定义请求方式
