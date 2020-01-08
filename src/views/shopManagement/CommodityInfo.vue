@@ -9,22 +9,6 @@
             </div>
             <div class="shopname">{{item.title}}</div>
           </div>
-          <div class="btn">
-            <el-button type="success" size="mini" class="btn1" @click="modfiyTwoGoods(item)">修改</el-button>
-            <el-dialog
-              title="修改商品名"
-              :visible.sync="dialogVisible"
-              width="30%"
-              :before-close="handleClose"
-            >
-              <el-input v-model="input" clearable></el-input>
-              <span slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary" @click="keepmodify">确 定</el-button>
-              </span>
-            </el-dialog>
-            <el-button type="success" size="mini">删除</el-button>
-          </div>
         </div>
         <div class="pageinfo">
           <el-pagination
@@ -50,8 +34,7 @@ export default {
       typeList: [],
       //input值
       input: "",
-      dialogVisible: false,
-      six:'',
+      dialogVisible: false
     };
   },
   //页面渲染完毕调用接口
@@ -71,8 +54,8 @@ export default {
       this.$api.firstlevel.findByType({ page, row: 10, id }).then(res => {
         let { image, totalElements, page } = res;
         this.typeList = res.content;
-        // console.log(res);
-
+/*          console.log(res);
+ */
         this.pagination = {
           page,
           totalElements
@@ -89,19 +72,10 @@ export default {
       this.details();
     },
     queryList(value) {
-      console.log(value); // 重新查询
       this.query = value;
       // 每次进行查询page归1
       this.pagination.totalPages = 1;
       this.details();
-    },
-    //点击弹框
-    handleClose(done) {
-      this.$confirm("未保存,确认关闭?")
-        .then(_ => {
-          done();
-        })
-        .catch(_ => {});
     },
     //点击修改 把当前分类名字存入修改input框
     modfiyTwoGoods(item) {
@@ -109,10 +83,9 @@ export default {
       this.dialogVisible = true;
     },
     //点击确认保存修改的名字
-    keepmodify() {
-      this.$api.firstlevel.save({title:this.input} ).then(res => {
-        this.six  = res;
-        console.log(res)
+    keepmodify(item) {
+      this.$api.firstlevel.save({title:this.input}).then(res => {
+        console.log(res);
       });
       this.dialogVisible = true;
     }
@@ -158,9 +131,6 @@ export default {
       white-space: nowrap;
     }
   }
-}
-.btn {
-  padding-left: 40px;
 }
 .pageinfo {
   width: 100%;

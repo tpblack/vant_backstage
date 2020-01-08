@@ -9,11 +9,18 @@
             </div>
             <div class="shopname">{{item.name}}</div>
           </div>
-          <div class="btn">
-            <el-button type="success" size="mini">修改</el-button>
-            <el-button type="success" size="mini">删除</el-button>
+           <div class="btn">
+            <el-button type="success" size="mini" @click="modifyName(item)">修改表名</el-button>
           </div>
         </div>
+        <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+        <el-input v-model="input"></el-input>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="modifyKeep">确 定</el-button>
+        </span>
+      </el-dialog>
       </div>
     </div>
   </div>
@@ -98,7 +105,7 @@ export default {
   }
 }
 .btn {
-  padding-left: 40px;
+  padding-left: 60px;
 }
 .pageinfo {
   width: 100%;

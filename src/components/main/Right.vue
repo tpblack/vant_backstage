@@ -24,10 +24,9 @@
           <i class="el-icon-shopping-cart-full"></i>
           <span slot="title">商品管理</span>
         </template>
-          <el-menu-item index="2-1" route="/firstManagement"> 商品一级类别管理</el-menu-item>
-          <el-menu-item index="2-2">商品二级类别管理</el-menu-item>
-          <el-menu-item index="2-3" route="/goodsList">商品</el-menu-item>
-          <el-menu-item index="2-4" route="/goodsListManagement">商品管理</el-menu-item>
+          <el-menu-item index="2-1" route="/firstManagement"> 商品类别管理</el-menu-item>
+          <el-menu-item index="2-2" route="/goodsList">商品</el-menu-item>
+          <el-menu-item index="2-3" route="/goodsListManagement">商品管理</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
