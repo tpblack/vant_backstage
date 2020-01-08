@@ -33,7 +33,7 @@
           <i class="el-icon-user"></i>
           <span slot="title">消费客户管理</span>
         </template>
-        <el-menu-item index="1-1" route="/customerInfo">消费客户的基本信息</el-menu-item>
+        <el-menu-item index="1-1" route="/CustomerInfo">消费客户的基本信息</el-menu-item>
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">
