@@ -9,18 +9,17 @@
             </div>
             <div class="shopname">{{item.name}}</div>
           </div>
-           <div class="btn">
+          <div class="btn">
             <el-button type="success" size="mini" @click="modifyName(item)">修改表名</el-button>
           </div>
         </div>
         <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-        <el-input v-model="input"></el-input>
-
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="modifyKeep">确 定</el-button>
-        </span>
-      </el-dialog>
+          <el-input v-model="input"></el-input>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="modifyKeep">确 定</el-button>
+          </span>
+        </el-dialog>
       </div>
     </div>
   </div>
@@ -33,7 +32,11 @@ export default {
     return {
       // 分页器
       pagination: {},
-      typeList: []
+      typeList: [],
+      input: "",
+      dialogVisible: false,
+      //接收item值
+      activeItem: {}
     };
   },
   //页面渲染完毕调用接口
@@ -63,6 +66,33 @@ export default {
       console.log(value); // 重新查询
 
       this.classification();
+    },
+    //将表面映射在弹出框input中
+    modifyName(item) {
+      this.activeItem = item;
+      this.input = item.name;
+      this.dialogVisible = true;
+    },
+    //关闭表名弹框提示
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
+    },
+    //修改名字保存
+    modifyKeep() {
+        var id = this.activeItem.id;
+        console.log(id)
+       this.$api.firstlevel.updateName({id:id,name:this.input}).then(res => {
+          this.$message.success({
+            message: "修改成功",
+            duration: 1000
+          });
+          this.classification();
+        }); 
+      this.dialogVisible = false;
     }
   }
 };
