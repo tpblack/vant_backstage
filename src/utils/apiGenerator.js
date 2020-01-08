@@ -41,13 +41,14 @@ class ApiGenerator { // es6的语法
                 console.log(store.state.localStorageKey);
                 if (store.state.localStorageKey) {
                     // console.log(localStorage.getItem("TOKEN"))
-                    //
+                    // 携带token的请求头
                     req.headers.token = store.state.localStorageKey;
                 }
                 // console.log(req)
                 return req;
             },
             (err) => { //请求拦截失败的回调函数 请求失败
+                console.log(err)
                 return Promise.reject(err); // 返回.catch方法
             }
         )
@@ -59,6 +60,13 @@ class ApiGenerator { // es6的语法
                 if (res.data.code === 0) {
                     // 响应成功  去除axios的第一层data  再去除服务器返回的数据的一层data
                     return res.data.data;
+                } else if (res.data.msg == "未登录用户") {
+                    localStorage.removeItem("TOKEN");
+                    store.commit("logout");
+                    if (!this.$store.localStorageKey) {
+                        alert("账号已在其他地方登录")
+                        this.$router.push("/'login");
+                    }
                 } else { //出现错误 提示出错
                     // 返回一个错误的promise
                     Message.error(res.data.msg);
