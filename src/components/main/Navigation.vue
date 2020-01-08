@@ -11,13 +11,13 @@
       <el-menu-item index="4">
         <el-input v-model="input" class="inputNavigation" size="small" autofocus placeholder="搜索"></el-input>
       </el-menu-item>
-      <el-submenu index="2">
+      <el-submenu index="2" style="margin-left:500px;">
         <template slot="title">个人中心</template>
         <el-menu-item index="2-1" route="/modifyPassword">修改密码</el-menu-item>
         <el-menu-item index="2-2">基本资料</el-menu-item>
-        <el-menu-item index="2-3">退出登录</el-menu-item>
+        <el-menu-item index="2-3" @click="logout">退出登录</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3">消息中心</el-menu-item>
+      <!-- <el-menu-item index="3">消息中心</el-menu-item> -->
     </el-menu>
     <div class="line"></div>
   </div>
@@ -40,6 +40,9 @@ export default {
     },
     switching() {
       this.fold();
+    },
+    logout(){
+      
     }
   }
 };

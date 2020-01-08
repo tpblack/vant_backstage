@@ -12,3 +12,7 @@ export var goodslistStatusBoolean = function (status) {
         return 0;
     }
 }
+
+export var goodsListPriceInsertSpot = function (price) {
+    return price.slice(0, -2) + '.' + price.slice(-2)
+}

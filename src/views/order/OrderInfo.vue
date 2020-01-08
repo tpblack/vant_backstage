@@ -41,25 +41,30 @@
           <el-table-column prop="spendMoney" label="买家是否已经评价"></el-table-column>-->
           <el-table-column label="操作">
             <template scope="slotScope">
-              <span @click="orderDetails_Tp(slotScope.row.orderId)" style="cursor:pointer; color:#b4b4b4">查看详情></span>
+              <span
+                @click="orderDetails_Tp(slotScope.row.orderId)"
+                style="cursor:pointer; color:#b4b4b4"
+              >查看详情></span>
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="pagination.totalElements"
-          :current-page="pagination.page"
-          @current-change="pageChange"
-          class="mypage"
-        />
+        <div class="pageInfo">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="pagination.totalElements"
+            :current-page="pagination.page"
+            @current-change="pageChange"
+            class="mypage"
+          />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {orderPaymentStatus,orderTimeInterception} from "@/utils/order";
+import { orderPaymentStatus, orderTimeInterception } from "@/utils/order";
 export default {
   data() {
     return {
@@ -99,8 +104,8 @@ export default {
             // 这是封装方法  判断状态
             item.status = orderPaymentStatus(item.status);
             // 这是封装方法  截取时间
-            item.consignTime = orderTimeInterception(item.consignTime)
-            item.paymentTime = orderTimeInterception(item.paymentTime)
+            item.consignTime = orderTimeInterception(item.consignTime);
+            item.paymentTime = orderTimeInterception(item.paymentTime);
             return item;
           });
           // console.log(this.tableData);
@@ -115,8 +120,8 @@ export default {
       // 重新查询
       this.findByOrderId();
     },
-    orderDetails_Tp(orderId){
-      this.$router.push({name:"orderDetails",params:{orderId}})
+    orderDetails_Tp(orderId) {
+      this.$router.push({ name: "orderDetails", params: { orderId } });
     }
   }
 };
@@ -139,6 +144,9 @@ export default {
     .title_orderInfo_tp {
       padding: 20px;
       margin-top: 20px;
+      .pageInfo{
+        text-align: center;
+      }
     }
   }
 }

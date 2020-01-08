@@ -1,7 +1,13 @@
 <template>
   <div class="goodsMng">
     <div class="top_orderInfo">
-      <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input2" clearable></el-input>
+      <el-input
+        placeholder="请输入标题"
+        prefix-icon="el-icon-search"
+        @change="search"
+        v-model="input2"
+        clearable
+      ></el-input>
     </div>
 
     <el-button @click="addGoodsList">点击新增</el-button>
@@ -17,8 +23,8 @@
               <img :src="slotScope.row.image" style="width:70px;height:70px" />
             </template>
           </el-table-column>
-          <el-table-column prop="title" label="商品标题" width="195px" align="center"></el-table-column>
-          <el-table-column  label="商品卖点" width="195px" align="center">
+          <el-table-column prop="title" label="商品标题" width="185px" align="center"></el-table-column>
+          <el-table-column label="商品卖点" width="185px" align="center">
             <template scope="slotScope">
               <div v-html="slotScope.row.sellPoint"></div>
             </template>
@@ -27,8 +33,8 @@
           <el-table-column prop="num" label="库存数量" align="center"></el-table-column>
           <el-table-column prop="cid" label="所属类目" align="center"></el-table-column>
           <el-table-column prop="status" label="商品状态" align="center"></el-table-column>
-          <el-table-column prop="created" label="创建时间" align="center"></el-table-column>
-          <el-table-column prop="updated" label="更新时间" align="center"></el-table-column>
+          <el-table-column prop="created" label="创建时间" align="center" width="90px"></el-table-column>
+          <el-table-column prop="updated" label="更新时间" align="center" width="90px"></el-table-column>
           <el-table-column label="操作" width="100px">
             <template scope="slotScope">
               <div style="cursor:pointer; color:#b4b4b4; margin-right:10px">查看详情></div>
@@ -36,14 +42,16 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="pagination.totalElements"
-          :current-page="pagination.page"
-          @current-change="pageChange"
-          class="mypage"
-        />
+        <div class="pageInfo">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="pagination.totalElements"
+            :current-page="pagination.page"
+            @current-change="pageChange"
+            class="mypage"
+          />
+        </div>
       </div>
     </div>
 
@@ -51,28 +59,33 @@
       <!-- <span>需要注意的是内容是默认不居中的</span> -->
       <div class="addGoods">
         <span>商品图片：</span>
-        <el-input size="small" placeholder="请输入内容" v-model="dalogFromAdd.image" style="width:270px"></el-input>
+        <el-input size="small" placeholder="请输入图片" v-model="dalogFromAdd.image" style="width:270px"></el-input>
       </div>
       <div class="addGoods">
         <span>商品标题：</span>
-        <el-input size="small" placeholder="请输入内容" v-model="dalogFromAdd.title" style="width:270px"></el-input>
+        <el-input size="small" placeholder="请输入标题" v-model="dalogFromAdd.title" style="width:270px"></el-input>
       </div>
       <div class="addGoods">
         <span>商品卖点：</span>
         <el-input
           size="small"
-          placeholder="请输入内容"
+          placeholder="请输入卖点"
           v-model="dalogFromAdd.sellPoint"
           style="width:270px"
         ></el-input>
       </div>
       <div class="addGoods">
         <span>商品价格：</span>
-        <el-input size="small" placeholder="请输入内容" v-model="dalogFromAdd.price" style="width:270px"></el-input>
+        <el-input
+          size="small"
+          placeholder="请输入价格(单位:分)"
+          v-model="dalogFromAdd.price"
+          style="width:270px"
+        ></el-input>
       </div>
       <div class="addGoods">
         <span>库存数量：</span>
-        <el-input size="small" placeholder="请输入内容" v-model="dalogFromAdd.num" style="width:270px"></el-input>
+        <el-input size="small" placeholder="请输入数量" v-model="dalogFromAdd.num" style="width:270px"></el-input>
       </div>
       <div class="addGoods">
         <span>所属类目：</span>
@@ -185,6 +198,10 @@ export default {
     };
   },
   methods: {
+    search() {
+      this.goodsListFindAll();
+    },
+    // 根据商品名称模糊查询商品，分页获取商品（当前页，每页条数，name）
     goodsListFindAll() {
       // 文本框的值
       let inputText = this.input2;
@@ -193,19 +210,22 @@ export default {
       // 在发送请求之前  将表格设为加载状态
       this.isLoading = true;
       // 发送请求
-      this.$api.firstlevel.findByName({ page, row: 10, name: "" }).then(res => {
-        // 在发送请求之前  将表格加载状态取消
-        this.isLoading = false;
-        let { content, totalElements } = res;
-        // console.log(res);
-        this.tableData = content.filter(item => {
-          item.status = goodslistStatus(item.status);
-          item.created = orderTimeInterception(item.created);
-          item.updated = orderTimeInterception(item.updated);
-          return item;
+      this.$api.firstlevel
+        .findByName({ page, row: 10, name: inputText })
+        .then(res => {
+          // 在发送请求之前  将表格加载状态取消
+          this.isLoading = false;
+          let { content, totalElements } = res;
+          // console.log(res);
+          this.tableData = content.filter(item => {
+            item.status = goodslistStatus(item.status);
+            item.created = orderTimeInterception(item.created);
+            item.updated = orderTimeInterception(item.updated);
+            item.price = item.price / 100;
+            return item;
+          });
+          this.pagination = { page, totalElements };
         });
-        this.pagination = { page, totalElements };
-      });
     },
     // 页面改变的方法
     pageChange(index) {
@@ -234,6 +254,7 @@ export default {
     goodsListModify() {
       let dalogFrom = this.dalogFrom;
       dalogFrom.status = goodslistStatusBoolean(dalogFrom.status);
+      dalogFrom.price = parseInt(dalogFrom.price * 100);
       console.log(dalogFrom);
       this.$api.firstlevel
         .save({
@@ -260,6 +281,47 @@ export default {
     // 新增一行商品数据
     goodsListAdd() {
       let dalogFromAdd = this.dalogFromAdd;
+      let reg = new RegExp("/^[0-9]*$/");
+      if (!dalogFromAdd.title) {
+        this.$message.error({
+          message: "标题不能为空",
+          duration: 1000
+        });
+        return;
+      }
+      if (!dalogFromAdd.price) {
+        this.$message.error({
+          message: "价格不能为空",
+          duration: 1000
+        });
+        return;
+      } else if (!reg.test(dalogFromAdd.price)) {
+        this.$message.error({
+          message: "请输入数字(单位:分)",
+          duration: 1000
+        });
+        return;
+      }
+      if (!dalogFromAdd.num) {
+        this.$message.error({
+          message: "数量不能为空",
+          duration: 1000
+        });
+        return;
+      } else if (!reg.test(dalogFromAdd.num)) {
+        this.$message.error({
+          message: "请输入数字",
+          duration: 1000
+        });
+        return;
+      }
+      if (!dalogFromAdd.cid) {
+        this.$message.error({
+          message: "状态不能为空",
+          duration: 1000
+        });
+        return;
+      }
       dalogFromAdd.price = parseInt(dalogFromAdd.price);
       dalogFromAdd.num = parseInt(dalogFromAdd.num);
       // dalogFromAdd.cid = parseInt(dalogFromAdd.cid);
@@ -310,9 +372,8 @@ export default {
     margin-top: 50px;
     // padding-bottom: 30px;
     border-top: 1px solid rgb(237, 237, 237);
-    .title_orderInfo_tp {
-      padding: 20px;
-      margin-top: 20px;
+    .pageInfo{
+      text-align: center;
     }
   }
   .addGoods {

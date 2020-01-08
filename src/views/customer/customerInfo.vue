@@ -28,6 +28,7 @@
           <el-table-column prop="total" label="消费总金额"></el-table-column>
           <el-table-column prop="notEvaluated" label="未评价数量"></el-table-column>
         </el-table>
+        <div class="pageInfo">
           <el-pagination
             background
             layout="prev, pager, next"
@@ -36,6 +37,7 @@
             @current-change="pageChange"
             class="mypage"
           />
+        </div>
       </div>
     </div>
   </div>
@@ -108,6 +110,9 @@ export default {
     .title_customerInfo_tp {
       padding: 20px;
       margin-top: 20px;
+      .pageInfo {
+        text-align: center;
+      }
     }
   }
 }
