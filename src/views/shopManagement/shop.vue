@@ -36,8 +36,9 @@ export default {
       typeList: [],
       //input值
       input: "",
-      //修改弹出框
-      dialogVisible: false
+      dialogVisible: false,
+      //接收item值
+      activeItem: {}
     };
   },
   //页面渲染完毕调用接口
@@ -57,7 +58,6 @@ export default {
       var id = this.$route.params.id;
       this.$api.firstlevel.findByAssistant({ id }).then(res => {
         this.typeList = res;
-        console.log(res);
       });
     },
     //跳转到商品页面
@@ -65,11 +65,31 @@ export default {
       this.$router.push({ name: "commodityInfo", params: { id: id } });
     },
   //点击修改 把当前分类名字存入修改input框
-    modfiyTwoGoods(item) {
+     modifyName(item) {
+      this.activeItem = item;
       this.input = item.name;
       this.dialogVisible = true;
+    },  
+    //关闭表名弹框提示
+    handleClose(done) {
+      this.$confirm("确认关闭？")
+        .then(_ => {
+          done();
+        })
+        .catch(_ => {});
     },
-  
+    //修改名字保存
+    modifyKeep() {
+        var id = this.activeItem.id;
+        this.$api.firstlevel.updateName({id:id,name:this.input}).then(res => {
+          this.$message.success({
+            message: "修改成功",
+            duration: 1000
+          });
+          this.details();
+        });  
+      this.dialogVisible = false;
+    }
   }
 };
 </script>

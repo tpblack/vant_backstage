@@ -36,7 +36,9 @@ export default {
       // 分页器
       pagination: {},
       dialogVisible: false,
+      //input获取的值
       input: "",
+      //接收item值
       activeItem: {}
     };
   },
@@ -74,10 +76,10 @@ export default {
     modifyKeep() {
       var id = this.activeItem.id;
       this.$api.firstlevel.updateName({id:id,name:this.input}).then(res => {
-       /*    this.$message.success({
+          this.$message.success({
             message: "修改成功",
             duration: 1000
-          }); */
+          });
           this.fetchManagement();
         });
       this.dialogVisible = false;
