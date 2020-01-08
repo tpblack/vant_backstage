@@ -50,8 +50,7 @@ export default {
       typeList: [],
       //input值
       input: "",
-      dialogVisible: false,
-      six:'',
+      dialogVisible: false
     };
   },
   //页面渲染完毕调用接口
@@ -71,8 +70,8 @@ export default {
       this.$api.firstlevel.findByType({ page, row: 10, id }).then(res => {
         let { image, totalElements, page } = res;
         this.typeList = res.content;
-        // console.log(res);
-
+/*          console.log(res);
+ */
         this.pagination = {
           page,
           totalElements
@@ -89,7 +88,6 @@ export default {
       this.details();
     },
     queryList(value) {
-      console.log(value); // 重新查询
       this.query = value;
       // 每次进行查询page归1
       this.pagination.totalPages = 1;
@@ -109,10 +107,9 @@ export default {
       this.dialogVisible = true;
     },
     //点击确认保存修改的名字
-    keepmodify() {
-      this.$api.firstlevel.save({title:this.input} ).then(res => {
-        this.six  = res;
-        console.log(res)
+    keepmodify(item) {
+      this.$api.firstlevel.save({title:this.input = item.title}).then(res => {
+        console.log(res);
       });
       this.dialogVisible = true;
     }
