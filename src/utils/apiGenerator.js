@@ -53,6 +53,7 @@ class ApiGenerator { // es6的语法
         // 定义一个响应的拦截器
         Axios.interceptors.response.use(
             (res) => {
+                console.log(res)
                 //如果响应码为0 则代表请求成功
                 if (res.data.code === 0) {
                     // 响应成功  去除axios的第一层data  再去除服务器返回的数据的一层data

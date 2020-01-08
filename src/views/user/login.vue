@@ -55,7 +55,7 @@ export default {
       this.$api.user
         .backstageLogin({ userName: this.input, password: this.input1 })
         .then(res => {
-          console.log(res);
+          console.log('token值',res);
           this.changeLogin_tokenTp(res)
           this.$router.push("/");
         });
