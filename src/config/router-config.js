@@ -7,9 +7,15 @@ const routers = [{
         component: Home,
         children: [{
                 //密码修改
+                path: '/userInfo',
+                name: 'userInfo',
+                component: () => import('@/views/user/UserInfo.vue'),
+            },
+            {
+                //密码修改
                 path: '/modifyPassword',
                 name: 'modifyPassword',
-                component: () => import('@/views/modify/modifyPassword'),
+                component: () => import('@/views/user/modifyPassword'),
             },
             {
                 //配置一级分类

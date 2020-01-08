@@ -25,7 +25,10 @@ export default new Vuex.Store({
     changeLogin(state, tokenValue) { //这里的state对应上面状态state
       state.localStorageKey = tokenValue;
       localStorage.setItem("TOKEN", tokenValue);
-    }
+    },
+    logout(state) { //这里的state对应上面状态state
+      state.localStorageKey = '';
+    },
   },
   actions: {
 

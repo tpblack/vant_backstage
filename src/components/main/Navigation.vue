@@ -13,8 +13,9 @@
       </el-menu-item>
       <el-submenu index="2" style="margin-left:500px;">
         <template slot="title">个人中心</template>
-        <el-menu-item index="2-1" @click="modifyPassword">修改密码</el-menu-item>
-        <el-menu-item index="2-2">基本资料</el-menu-item>
+        <!-- <el-menu-item index="2-1" @click="modifyPassword">修改密码</el-menu-item>
+        <el-menu-item index="2-2" @click="userInfo">基本资料</el-menu-item> -->
+        <el-menu-item index="2-2">欢迎你 : {{userText.username}}</el-menu-item>
         <el-menu-item index="2-3" @click="logout">退出登录</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item index="3">消息中心</el-menu-item> -->
@@ -30,7 +31,8 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      input: ""
+      input: "",
+      userText: []
     };
   },
   methods: {
@@ -41,10 +43,33 @@ export default {
     switching() {
       this.fold();
     },
-    logout() {},
+    // 退出登录
+    logout() {
+      this.$api.user.escLogin().then(res => {
+        localStorage.removeItem("TOKEN");
+        this.$store.commit("logout");
+        this.userText = [];
+        if (!this.$store.localStorageKey) {
+          this.$router.push("/'login");
+        }
+      });
+    },
+    // 跳转到修改密码页面
     modifyPassword() {
-      this.this.$router.push("/modifyPassword");
+      this.$router.push("/modifyPassword");
+    },
+    // 跳转到用户基本信息页面
+    userInfo() {
+      this.$router.push("/userInfo");
+    },
+    userInfoByToken() {
+      this.$api.user.findByUser().then(res => {
+        this.userText = res;
+      });
     }
+  },
+  mounted() {
+    this.userInfoByToken();
   }
 };
 </script>

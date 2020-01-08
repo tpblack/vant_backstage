@@ -41,6 +41,7 @@ class ApiGenerator { // es6的语法
                 console.log(store.state.localStorageKey);
                 if (store.state.localStorageKey) {
                     // console.log(localStorage.getItem("TOKEN"))
+                    //
                     req.headers.token = store.state.localStorageKey;
                 }
                 // console.log(req)
