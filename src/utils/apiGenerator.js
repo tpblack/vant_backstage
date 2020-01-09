@@ -63,10 +63,7 @@ class ApiGenerator { // es6的语法
                 } else if (res.data.msg == "未登录用户") {
                     localStorage.removeItem("TOKEN");
                     store.commit("logout");
-                    if (!this.$store.localStorageKey) {
-                        alert("账号已在其他地方登录")
-                        this.$router.push("/'login");
-                    }
+                    this.$router.push("/'login");
                 } else { //出现错误 提示出错
                     // 返回一个错误的promise
                     Message.error(res.data.msg);
