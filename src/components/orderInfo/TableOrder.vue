@@ -9,12 +9,6 @@
       <el-table-column prop="num" label="购买数量"></el-table-column>
       <el-table-column prop="price" label="商品单价"></el-table-column>
       <el-table-column prop="totalFee" label="商品总金额"></el-table-column>
-
-      <el-table-column label="操作">
-        <template>
-          <router-link to="/orderDetails" style="cursor:pointer; color:#b4b4b4 ">查看详情></router-link>
-        </template>
-      </el-table-column>
     </el-table>
     <!-- <el-pagination
       background

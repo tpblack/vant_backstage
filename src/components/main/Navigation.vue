@@ -15,7 +15,8 @@
         <template slot="title">个人中心</template>
         <!-- <el-menu-item index="2-1" @click="modifyPassword">修改密码</el-menu-item>
         <el-menu-item index="2-2" @click="userInfo">基本资料</el-menu-item> -->
-        <el-menu-item index="2-2">欢迎你 : {{userText.username}}</el-menu-item>
+        <el-menu-item index="2-1">欢迎你 : {{userText.username}}</el-menu-item>
+        <el-menu-item index="2-2" @click="operationRecord">查看操作日志</el-menu-item>
         <el-menu-item index="2-3" @click="logout">退出登录</el-menu-item>
       </el-submenu>
       <!-- <el-menu-item index="3">消息中心</el-menu-item> -->
@@ -66,6 +67,10 @@ export default {
       this.$api.user.findByUser().then(res => {
         this.userText = res;
       });
+    },
+    // 跳转到操作日志页面
+    operationRecord(){
+      this.$router.push("operationRecord");
     }
   },
   mounted() {

@@ -1,6 +1,6 @@
 <template>
   <div class="goodsMng">
-    <div class="top_orderInfo">
+    <div class="top_goodsMng">
       <el-input
         placeholder="请输入标题"
         prefix-icon="el-icon-search"
@@ -11,8 +11,8 @@
     </div>
 
     <el-button @click="addGoodsList">点击新增</el-button>
-    <div class="botton_orderInfo">
-      <div class="title_customerInfo_tp">
+    <div class="botton_goodsMng">
+      <div class="title_goodsMng_tp">
         <el-table
           :data="tableData"
           v-loading="isLoading"
@@ -281,7 +281,7 @@ export default {
     // 新增一行商品数据
     goodsListAdd() {
       let dalogFromAdd = this.dalogFromAdd;
-      let reg = new RegExp("/^[0-9]*$/");
+      // let reg = new RegExp("/^[0-9]*$/");
       if (!dalogFromAdd.title) {
         this.$message.error({
           message: "标题不能为空",
@@ -295,7 +295,7 @@ export default {
           duration: 1000
         });
         return;
-      } else if (!reg.test(dalogFromAdd.price)) {
+      } else if (!typeof dalogFromAdd.price === "number") {
         this.$message.error({
           message: "请输入数字(单位:分)",
           duration: 1000
@@ -308,7 +308,7 @@ export default {
           duration: 1000
         });
         return;
-      } else if (!reg.test(dalogFromAdd.num)) {
+      } else if (!typeof dalogFromAdd.price === "number") {
         this.$message.error({
           message: "请输入数字",
           duration: 1000
@@ -361,18 +361,19 @@ export default {
 .goodsMng {
   padding: 20px;
   background-color: #fff;
-  .top_orderInfo {
+  .top_goodsMng {
     max-width: 90%;
     margin: 0 auto;
     padding-top: 20px;
     padding-bottom: 20px;
   }
 
-  .botton_orderInfo {
+  .botton_goodsMng {
     margin-top: 50px;
     // padding-bottom: 30px;
     border-top: 1px solid rgb(237, 237, 237);
     .pageInfo{
+      padding-top: 20px; 
       text-align: center;
     }
   }

@@ -10,7 +10,8 @@ import firstlevel from './modules/firstlevel.js';
 import customerInfo from './modules/customerInfo.js';
 // 引入orderInfo模块 订单模块
 import orderInfo from './modules/orderInfo.js';
-
+// 引入history模块 订单模块
+import history from './modules/history.js';
 // 引入api生成器
 import ApiGenerator from '@/utils/apiGenerator';
 
@@ -21,7 +22,8 @@ const Modules = {
     firstlevel, //属性和值用于 省略一个可以不写
     customerInfo,
     orderInfo,
-    user
+    user,
+    history
 }
 
 

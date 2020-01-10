@@ -17,6 +17,11 @@ const routers = [{
                 name: 'modifyPassword',
                 component: () => import('@/views/user/modifyPassword'),
             },
+            {  // 操作日志页面
+                path: '/operationRecord',
+                name: 'operationRecord',
+                component: () => import('@/views/user/OperationRecord.vue')
+            },
             {
                 //配置一级分类
                 path: '/firstManagement',
@@ -84,7 +89,8 @@ const routers = [{
                 path: '/FlowInfo',
                 name: 'FlowInfo',
                 component: () => import('@/views/accountManagement/FlowInfo'),
-            }
+            },
+           
         ],
     },
     { //  登录

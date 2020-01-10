@@ -9,7 +9,7 @@
       <!-- 这是用户 -->
       <UserOrder :order="orderDetailsList"></UserOrder>
     </div>
-    <div>
+    <div class="tableOrder">
       <!-- 这是表格 -->
       <TableOrder :order="orderDetailsList.tbOrderItems"></TableOrder>
     </div>
@@ -54,7 +54,6 @@ export default {
         res.closeTime = orderTimeInterception(res.closeTime);
         // 这是封装方法  判断买家是否评价
         res.buyerRate = orderBuyerRate(res.buyerRate);
-
         // 赋值
         this.orderDetailsList = res;
       });
@@ -77,6 +76,9 @@ export default {
     padding-top: 20px;
     padding-bottom: 34px;
     border-bottom: 1px #e8e8e8 solid;
+  }
+  .tableOrder{
+    margin-top: 30px;
   }
 }
 </style>

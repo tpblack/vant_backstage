@@ -111,6 +111,7 @@ export default {
       padding: 20px;
       margin-top: 20px;
       .pageInfo {
+        padding-top: 20px; 
         text-align: center;
       }
     }
